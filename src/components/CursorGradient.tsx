@@ -26,12 +26,12 @@ export function CursorGradient() {
       style={{
         background:
           'radial-gradient(circle at center, hsla(340, 75%, 55%, 0.4) 0%, hsla(210, 100%, 66%, 0.4) 40%, transparent 80%), linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
-        backgroundSize: '100% 100%, 4rem 4rem',
+        backgroundSize: '100% 100%, 4rem 4rem, 4rem 4rem',
       }}
       animate={{
         x: mousePosition.x,
         y: mousePosition.y,
-        backgroundPosition: `${-mousePosition.x}px ${-mousePosition.y}px, 0 0`,
+        backgroundPosition: `center, ${-mousePosition.x}px ${-mousePosition.y}px, ${-mousePosition.x}px ${-mousePosition.y}px`,
       }}
       transition={{
         type: 'spring',
@@ -42,4 +42,3 @@ export function CursorGradient() {
     />
   );
 }
-
