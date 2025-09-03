@@ -13,17 +13,19 @@ const cardVariants = {
     x: direction > 0 ? 500 : -500,
     opacity: 0,
     scale: 0.8,
+    rotateY: direction > 0 ? -180 : 180,
     zIndex: 0,
   }),
   center: (index: number) => ({
     x: 0,
     opacity: 1,
-    scale: 1 - Math.min(index * 0.05, 0.2), // The active card is at scale 1
-    y: index * 30, // Increased stacking effect
+    scale: 1 - Math.min(index * 0.05, 0.2),
+    y: index * 30,
+    rotateY: 0,
     zIndex: 10 - index,
     transition: {
       type: 'spring',
-      stiffness: 200, // Reduced from 300
+      stiffness: 200,
       damping: 30,
     },
   }),
@@ -31,10 +33,11 @@ const cardVariants = {
     x: direction < 0 ? 500 : -500,
     opacity: 0,
     scale: 0.8,
+    rotateY: direction < 0 ? 180 : -180,
     zIndex: 0,
     transition: {
       type: 'spring',
-      stiffness: 200, // Reduced from 300
+      stiffness: 200,
       damping: 30,
     },
   }),
@@ -94,6 +97,7 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
                 onDragEnd={handleDragEnd}
                 style={{
                   transformOrigin: 'center center',
+                  transformStyle: 'preserve-3d',
                 }}
                 // Pass the relative index to the center animation
                 custom={displayIndex}
