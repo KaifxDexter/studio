@@ -12,7 +12,7 @@ const cardVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 300 : -300,
     opacity: 0,
-    rotateY: direction > 0 ? -180 : 180,
+    rotateY: 90,
     scale: 0.9,
     zIndex: 0,
   }),
@@ -20,7 +20,8 @@ const cardVariants = {
     x: 0,
     opacity: 1,
     scale: 1 - Math.min(index * 0.05, 0.2),
-    y: index * 30,
+    y: index * 20,
+    rotate: index > 0 ? (index % 2 === 0 ? -3 : 3) : 0, // Tilt subsequent cards
     rotateY: 0,
     zIndex: 10 - index,
     transition: {
@@ -32,7 +33,7 @@ const cardVariants = {
   exit: (direction: number) => ({
     x: direction < 0 ? 300 : -300,
     opacity: 0,
-    rotateY: direction < 0 ? 180 : -180,
+    rotateY: -90,
     scale: 0.9,
     zIndex: 0,
     transition: {
@@ -97,12 +98,11 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
                 onDragEnd={handleDragEnd}
                 style={{
                   transformOrigin: 'center center',
-                  transformStyle: 'preserve-3d',
                 }}
                 // @ts-ignore
                 custom={displayIndex}
               >
-                  <CampaignCard campaign={campaign} />
+                  <CampaignCard campaign={campaign} animationDirection="left" />
                 </motion.div>
             ))}
         </AnimatePresence>

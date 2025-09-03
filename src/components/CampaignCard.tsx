@@ -47,9 +47,6 @@ export function CampaignCard({ campaign, animationDirection }: CampaignCardProps
   return (
     <motion.div
       variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
       custom={animationDirection}
       className="h-full"
     >
