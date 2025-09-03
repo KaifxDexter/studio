@@ -1,0 +1,205 @@
+'use client';
+
+import { useTransition } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+import { Wand2 } from 'lucide-react';
+import { generateDescriptionAction } from '../actions';
+
+const formSchema = z.object({
+  title: z.string().min(5, {
+    message: 'Title must be at least 5 characters.',
+  }),
+  cause: z.enum(['Medical', 'Education', 'Disaster Relief', 'Personal'], {
+    required_error: 'You need to select a campaign cause.',
+  }),
+  targetAmount: z.coerce
+    .number({ invalid_type_error: 'Please enter a valid number.' })
+    .positive({ message: 'Target amount must be positive.' }),
+  description: z.string().min(20, {
+    message: 'Description must be at least 20 characters.',
+  }),
+  imageUrl: z.string().url({ message: 'Please enter a valid image URL.' }),
+});
+
+export default function CreateCampaignPage() {
+  const { toast } = useToast();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: '',
+      targetAmount: 1000,
+      description: '',
+      imageUrl: 'https://picsum.photos/600/400',
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+    toast({
+      title: 'Campaign Created (Simulated)!',
+      description: 'Your campaign has been successfully created.',
+    });
+    router.push('/');
+  }
+  
+  const handleGenerateDescription = () => {
+    const { title, cause, targetAmount } = form.getValues();
+
+    startTransition(async () => {
+      const result = await generateDescriptionAction({ title, cause, targetAmount });
+      if (result.success && result.description) {
+        form.setValue('description', result.description);
+        toast({
+          title: 'Description Generated',
+          description: 'The AI has generated a description for your campaign.',
+        });
+      } else {
+        toast({
+          title: 'Generation Failed',
+          description: result.error || 'Could not generate a description.',
+          variant: 'destructive',
+        });
+      }
+    });
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-8 md:py-16 max-w-3xl">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-3xl font-headline">Create a New Campaign</CardTitle>
+          <CardDescription>Fill in the details below to start your fundraising journey.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Campaign Title</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., Help Rebuild the Community Library" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <FormField
+                  control={form.control}
+                  name="cause"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Cause</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a cause" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Medical">Medical</SelectItem>
+                          <SelectItem value="Education">Education</SelectItem>
+                          <SelectItem value="Disaster Relief">Disaster Relief</SelectItem>
+                          <SelectItem value="Personal">Personal</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="targetAmount"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Target Amount ($)</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="1000" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              
+              <FormField
+                control={form.control}
+                name="imageUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Campaign Image URL</FormLabel>
+                    <FormControl>
+                      <Input placeholder="https://example.com/image.jpg" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Use a placeholder from picsum.photos or provide your own image link.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex justify-between items-center">
+                      <FormLabel>Campaign Description</FormLabel>
+                      <Button type="button" variant="ghost" size="sm" onClick={handleGenerateDescription} disabled={isPending}>
+                        <Wand2 className="mr-2 h-4 w-4" />
+                        {isPending ? 'Generating...' : 'Generate with AI'}
+                      </Button>
+                    </div>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Tell a compelling story about your cause..."
+                        className="resize-y min-h-[120px]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button type="submit" size="lg" className="w-full font-bold">Create Campaign</Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
