@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -43,14 +44,27 @@ const profileFormSchema = z.object({
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
+const defaultProfile = {
+  name: 'Jane Doe',
+  email: 'jane.doe@example.com',
+  bio: 'Passionate about leveraging technology to create positive social impact. Believer in community and kindness.',
+};
+
 export default function ProfilePage() {
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [userProfile, setUserProfile] = useState({
-    name: 'Jane Doe',
-    email: 'jane.doe@example.com',
-    bio: 'Passionate about leveraging technology to create positive social impact. Believer in community and kindness.',
-  });
+  const [userProfile, setUserProfile] = useState(defaultProfile);
+
+  useEffect(() => {
+    try {
+      const storedProfile = localStorage.getItem('userProfile');
+      if (storedProfile) {
+        setUserProfile(JSON.parse(storedProfile));
+      }
+    } catch (error) {
+      console.error("Could not load user profile from localStorage", error);
+    }
+  }, []);
 
   const userCampaigns = campaigns.slice(0, 2);
   const userDonations = campaigns.slice(2, 4);
@@ -61,15 +75,28 @@ export default function ProfilePage() {
       name: userProfile.name,
       email: userProfile.email,
       bio: userProfile.bio,
-    }
+    },
+    // This will re-initialize the form when userProfile changes
+    enableReinitialize: true, 
   });
 
   function onSubmit(data: ProfileFormValues) {
-    setUserProfile((prev) => ({ ...prev, name: data.name, email: data.email, bio: data.bio || '' }));
-    toast({
-      title: 'Profile Updated',
-      description: 'Your profile information has been saved.',
-    });
+    const updatedProfile = { ...userProfile, name: data.name, email: data.email, bio: data.bio || '' };
+    setUserProfile(updatedProfile);
+    try {
+      localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
+      toast({
+        title: 'Profile Updated',
+        description: 'Your profile information has been saved.',
+      });
+    } catch (error) {
+      console.error("Could not save user profile to localStorage", error);
+      toast({
+        title: 'Error',
+        description: 'Could not save your profile changes.',
+        variant: 'destructive'
+      });
+    }
     setIsDialogOpen(false);
   }
 
