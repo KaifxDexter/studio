@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
 
@@ -13,6 +14,9 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Donify. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
+            <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">
+              Contact
+            </Link>
             <Link href="#" className="text-sm text-muted-foreground hover:text-primary">
               Privacy Policy
             </Link>

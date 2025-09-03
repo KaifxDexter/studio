@@ -1,8 +1,9 @@
+
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HandHeart, Home, PlusCircle, User } from 'lucide-react';
+import { HandHeart, Home, PlusCircle, User, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/Logo';
@@ -10,6 +11,7 @@ import { Logo } from '@/components/Logo';
 const navLinks = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/create', label: 'Create', icon: PlusCircle },
+  { href: '/contact', label: 'Contact', icon: Mail },
   { href: '/profile', label: 'Profile', icon: User },
 ];
 
