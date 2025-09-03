@@ -95,7 +95,7 @@ export default function ProfilePage() {
                 Edit Profile
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] glass-card">
               <DialogHeader>
                 <DialogTitle>Edit Profile</DialogTitle>
                 <DialogDescription>
@@ -146,12 +146,12 @@ export default function ProfilePage() {
       </div>
 
       <Tabs defaultValue="campaigns" className="w-full">
-        <TabsList className="grid w-full md:w-1/2 lg:w-1/3 grid-cols-2">
+        <TabsList className="grid w-full md:w-1/2 lg:w-1/3 grid-cols-2 bg-muted/60 backdrop-blur-xl">
           <TabsTrigger value="campaigns">My Campaigns</TabsTrigger>
           <TabsTrigger value="donations">My Donations</TabsTrigger>
         </TabsList>
         <TabsContent value="campaigns" className="mt-6">
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle>Campaigns You've Created</CardTitle>
             </CardHeader>
@@ -169,14 +169,14 @@ export default function ProfilePage() {
           </Card>
         </TabsContent>
         <TabsContent value="donations" className="mt-6">
-          <Card>
+          <Card className="glass-card">
             <CardHeader>
               <CardTitle>Your Donation History</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {userDonations.length > 0 ? (
                  userDonations.map(donation => (
-                  <div key={donation.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div key={donation.id} className="flex items-center justify-between p-4 border rounded-lg glass-card">
                     <div>
                       <p className="font-semibold">{donation.title}</p>
                       <p className="text-sm text-muted-foreground">Donated on {new Date().toLocaleDateString()}</p>

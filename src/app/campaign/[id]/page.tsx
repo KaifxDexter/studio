@@ -22,8 +22,8 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
       <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
         <div className="lg:col-span-2">
           <div className="mb-6">
-            <Badge variant="secondary" className="mb-2">{campaign.cause}</Badge>
-            <h1 className="text-3xl md:text-5xl font-headline font-bold text-gray-900 dark:text-gray-100">
+            <Badge variant="secondary" className="mb-2 bg-black/50 text-white">{campaign.cause}</Badge>
+            <h1 className="text-3xl md:text-5xl font-headline font-bold text-white">
               {campaign.title}
             </h1>
             <div className="flex items-center mt-4 text-muted-foreground">
@@ -31,7 +31,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
               <span>Organized by {campaign.fundraiserName}</span>
             </div>
           </div>
-          <Card className="mb-8 overflow-hidden">
+          <Card className="mb-8 overflow-hidden glass-card">
             <Image
               src={campaign.imageUrl}
               alt={campaign.title}
@@ -47,7 +47,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
           </div>
         </div>
         <div className="lg:col-span-1">
-          <Card className="sticky top-24 shadow-lg">
+          <Card className="sticky top-24 shadow-lg glass-card">
             <CardHeader>
               <div className="space-y-2">
                 <Progress value={progress} className="h-3" />
@@ -63,7 +63,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
             </CardHeader>
             <CardContent className="text-center">
               <h3 className="text-lg font-semibold mb-4">Donate via any UPI App</h3>
-              <div className="p-4 bg-accent/50 rounded-lg inline-block">
+              <div className="p-4 bg-white/90 rounded-lg inline-block">
                 <Image
                   src={qrCodeUrl}
                   alt="Donation QR Code"

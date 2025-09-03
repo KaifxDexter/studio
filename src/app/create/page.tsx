@@ -93,7 +93,7 @@ export default function CreateCampaignPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-16 max-w-3xl">
-      <Card>
+      <Card className="glass-card">
         <CardHeader>
           <CardTitle className="text-3xl font-headline">Create a New Campaign</CardTitle>
           <CardDescription>Fill in the details below to start your fundraising journey.</CardDescription>

@@ -21,7 +21,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 glass-card">
       <CardHeader className="p-0 relative">
         <Link href={`/campaign/${campaign.id}`} className="block">
           <Image
@@ -33,7 +33,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             data-ai-hint="fundraising event"
           />
         </Link>
-        <Badge variant="secondary" className="absolute top-2 right-2">{campaign.cause}</Badge>
+        <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
       </CardHeader>
       <CardContent className="flex-grow p-4">
         <CardTitle className="text-lg font-bold leading-snug mb-2 line-clamp-2 h-[56px]">
