@@ -1,4 +1,11 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,10 +13,67 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { User, Edit } from 'lucide-react';
 import { campaigns } from '@/lib/data';
 import { CampaignCard } from '@/components/CampaignCard';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from '@/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
+
+const profileFormSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  bio: z.string().max(200, { message: 'Bio cannot be more than 200 characters.' }).optional(),
+});
+
+type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function ProfilePage() {
-  const userCampaigns = campaigns.slice(0, 2); 
+  const { toast } = useToast();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [userProfile, setUserProfile] = useState({
+    name: 'Jane Doe',
+    email: 'jane.doe@example.com',
+    bio: 'Passionate about leveraging technology to create positive social impact. Believer in community and kindness.',
+  });
+
+  const userCampaigns = campaigns.slice(0, 2);
   const userDonations = campaigns.slice(2, 4);
+
+  const form = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      name: userProfile.name,
+      bio: userProfile.bio,
+    },
+    values: { // ensures form is pre-filled when dialog opens
+      name: userProfile.name,
+      bio: userProfile.bio,
+    }
+  });
+
+  function onSubmit(data: ProfileFormValues) {
+    setUserProfile((prev) => ({ ...prev, name: data.name, bio: data.bio || '' }));
+    toast({
+      title: 'Profile Updated',
+      description: 'Your profile information has been saved.',
+    });
+    setIsDialogOpen(false);
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-16">
@@ -21,13 +85,63 @@ export default function ProfilePage() {
           </AvatarFallback>
         </Avatar>
         <div className="text-center md:text-left">
-          <h1 className="text-3xl md:text-4xl font-headline font-bold">Jane Doe</h1>
-          <p className="text-muted-foreground mt-1">jane.doe@example.com</p>
-          <p className="max-w-xl mt-2">Passionate about leveraging technology to create positive social impact. Believer in community and kindness.</p>
-          <Button variant="outline" className="mt-4">
-            <Edit className="mr-2 h-4 w-4" />
-            Edit Profile
-          </Button>
+          <h1 className="text-3xl md:text-4xl font-headline font-bold">{userProfile.name}</h1>
+          <p className="text-muted-foreground mt-1">{userProfile.email}</p>
+          <p className="max-w-xl mt-2">{userProfile.bio}</p>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="mt-4">
+                <Edit className="mr-2 h-4 w-4" />
+                Edit Profile
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Edit Profile</DialogTitle>
+                <DialogDescription>
+                  Make changes to your profile here. Click save when you're done.
+                </DialogDescription>
+              </DialogHeader>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your Name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="bio"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Bio</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Tell us a little about yourself" className="resize-none" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                   <DialogFooter>
+                      <DialogClose asChild>
+                        <Button type="button" variant="secondary">
+                          Cancel
+                        </Button>
+                      </DialogClose>
+                      <Button type="submit">Save Changes</Button>
+                  </DialogFooter>
+                </form>
+              </Form>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
