@@ -4,9 +4,8 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { CampaignCard } from '@/components/CampaignCard';
+import { CampaignDeck } from '@/components/CampaignDeck';
 import { campaigns } from '@/lib/data';
-import type { Campaign } from '@/lib/types';
 import { ArrowRight } from 'lucide-react';
 
 const sectionVariants = {
@@ -17,15 +16,6 @@ const sectionVariants = {
     transition: {
       duration: 0.8,
       ease: 'easeOut',
-    },
-  },
-};
-
-const cardContainerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
     },
   },
 };
@@ -71,21 +61,7 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12 text-white">
             Active Campaigns
           </h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={cardContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            {campaigns.map((campaign: Campaign, index: number) => (
-              <CampaignCard 
-                key={campaign.id} 
-                campaign={campaign} 
-                animationDirection={index % 2 === 0 ? 'left' : 'right'}
-              />
-            ))}
-          </motion.div>
+          <CampaignDeck campaigns={campaigns} />
         </div>
       </motion.section>
     </div>

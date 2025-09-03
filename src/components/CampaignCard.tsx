@@ -3,9 +3,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import type { Campaign } from '@/lib/types';
-import { cn } from '@/lib/utils';
 import {
   Card,
   CardContent,
@@ -16,75 +14,56 @@ import {
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
 
 interface CampaignCardProps {
   campaign: Campaign;
-  animationDirection: 'left' | 'right';
 }
 
-const cardVariants = (direction: 'left' | 'right') => ({
-  hidden: {
-    opacity: 0,
-    x: direction === 'left' ? -100 : 100,
-    rotate: direction === 'left' ? -6 : 6,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    rotate: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-});
-
-export function CampaignCard({ campaign, animationDirection }: CampaignCardProps) {
+export function CampaignCard({ campaign }: CampaignCardProps) {
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
 
   return (
-    <motion.div variants={cardVariants(animationDirection)}>
-      <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 glass-card">
-        <CardHeader className="p-0 relative">
-          <Link href={`/campaign/${campaign.id}`} className="block">
-            <Image
-              src={campaign.imageUrl}
-              alt={campaign.title}
-              width={600}
-              height={400}
-              className="w-full h-48 object-cover"
-              data-ai-hint="fundraising event"
-            />
+    <Card className="flex flex-col h-full w-full overflow-hidden transition-all duration-300 glass-card">
+      <CardHeader className="p-0 relative">
+        <Link href={`/campaign/${campaign.id}`} className="block">
+          <Image
+            src={campaign.imageUrl}
+            alt={campaign.title}
+            width={600}
+            height={400}
+            className="w-full h-48 object-cover"
+            data-ai-hint="fundraising event"
+          />
+        </Link>
+        <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
+      </CardHeader>
+      <CardContent className="flex-grow p-4">
+        <CardTitle className="text-lg font-bold leading-snug mb-2 line-clamp-2 h-[56px]">
+          <Link href={`/campaign/${campaign.id}`} className="hover:text-primary transition-colors">
+            {campaign.title}
           </Link>
-          <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
-        </CardHeader>
-        <CardContent className="flex-grow p-4">
-          <CardTitle className="text-lg font-bold leading-snug mb-2 line-clamp-2 h-[56px]">
-            <Link href={`/campaign/${campaign.id}`} className="hover:text-primary transition-colors">
-              {campaign.title}
-            </Link>
-          </CardTitle>
-          <p className="text-sm text-muted-foreground line-clamp-3 h-[60px]">
-            {campaign.description}
-          </p>
-          <div className="mt-4 space-y-2">
-            <Progress value={progress} className="h-2" />
-            <div className="flex justify-between text-sm">
-              <span className="font-semibold text-foreground">
-                ₹{campaign.raisedAmount.toLocaleString()}
-              </span>
-              <span className="text-muted-foreground">
-                of ₹{campaign.targetAmount.toLocaleString()}
-              </span>
-            </div>
+        </CardTitle>
+        <p className="text-sm text-muted-foreground line-clamp-3 h-[60px]">
+          {campaign.description}
+        </p>
+        <div className="mt-4 space-y-2">
+          <Progress value={progress} className="h-2" />
+          <div className="flex justify-between text-sm">
+            <span className="font-semibold text-foreground">
+              ₹{campaign.raisedAmount.toLocaleString()}
+            </span>
+            <span className="text-muted-foreground">
+              of ₹{campaign.targetAmount.toLocaleString()}
+            </span>
           </div>
-        </CardContent>
-        <CardFooter className="p-4 pt-0">
-          <Button asChild className="w-full font-bold">
-            <Link href={`/campaign/${campaign.id}`}>Donate Now</Link>
-          </Button>
-        </CardFooter>
-      </Card>
-    </motion.div>
+        </div>
+      </CardContent>
+      <CardFooter className="p-4 pt-0">
+        <Button asChild className="w-full font-bold">
+          <Link href={`/campaign/${campaign.id}`}>Donate Now</Link>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
