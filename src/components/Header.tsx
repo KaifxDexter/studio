@@ -20,7 +20,7 @@ export function Header() {
   const isAuthenticated = false; // Placeholder for auth logic
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-black/10 backdrop-blur-[24px]">
+    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-black/10 backdrop-blur-[24px] transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:scale-[1.02]">
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
