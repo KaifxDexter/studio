@@ -1,6 +1,7 @@
 
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
+import { SocialBubbles } from '@/components/SocialBubbles';
 
 export function Footer() {
   return (
@@ -10,20 +11,12 @@ export function Footer() {
           <div className="flex items-center mb-4 md:mb-0">
             <Logo />
           </div>
+          <div className="flex-grow md:flex-grow-0 md:absolute md:left-1/2 md:-translate-x-1/2">
+             <SocialBubbles />
+          </div>
           <p className="text-sm text-muted-foreground text-center md:text-left">
             &copy; {new Date().getFullYear()} Donify. All rights reserved.
           </p>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">
-              Contact
-            </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-primary">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-primary">
-              Terms of Service
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

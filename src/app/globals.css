@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 3%;
+    --background: 0 0% 0%;
     --foreground: 213 31% 91%;
 
     --card: 216 34% 17%;
@@ -42,7 +42,7 @@
   }
 
   .dark {
-    --background: 0 0% 3%;
+    --background: 0 0% 0%;
     --foreground: 213 31% 91%;
 
     --card: 216 34% 17%;
@@ -94,5 +94,30 @@
   .glass-card {
     @apply bg-black/10 backdrop-blur-[24px] shadow-[0_10px_30px_rgba(0,0,0,0.25)] border border-white/20;
     box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  .social-bubble-container {
+    animation: rise 20s infinite ease-in-out;
+  }
+
+  @keyframes rise {
+    0% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-20px) translateX(5px);
+    }
+    100% {
+      transform: translateY(0) translateX(0);
+    }
+  }
+
+  .social-bubble {
+    @apply transition-all duration-300;
+  }
+
+  .social-bubble:hover {
+    transform: scale(1.2) translateY(-10px);
+    box-shadow: 0 0 20px hsla(var(--primary), 0.7), 0 0 30px hsla(var(--primary), 0.5);
   }
 }
