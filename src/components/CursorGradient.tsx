@@ -30,7 +30,7 @@ export function CursorGradient() {
           translateX: '-50%',
           translateY: '-50%',
           background:
-            'radial-gradient(circle at center, hsla(340, 75%, 55%, 0.4) 0%, hsla(210, 100%, 66%, 0.4) 40%, transparent 80%)',
+            'radial-gradient(circle at center, hsla(340, 75%, 55%, 0.4) 0%, hsla(210, 100%, 66%, 0.4) 28%, transparent 80%)',
           filter: 'blur(24px)', 
         }}
         transition={{
