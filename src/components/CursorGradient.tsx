@@ -24,7 +24,8 @@ export function CursorGradient() {
     <motion.div
       className="pointer-events-none fixed -left-48 -top-48 z-20 h-96 w-96 rounded-full blur-3xl opacity-50"
       style={{
-        background: 'radial-gradient(circle, hsl(var(--primary)) 20%, transparent 80%)',
+        background:
+          'radial-gradient(circle at center, hsla(340, 75%, 55%, 0.4) 0%, hsla(210, 100%, 66%, 0.4) 40%, transparent 80%)',
       }}
       animate={{
         x: mousePosition.x,
