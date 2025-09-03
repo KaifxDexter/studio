@@ -14,7 +14,7 @@ export default function Home() {
             Empower Change, One Scan at a Time
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground">
-            FundMe makes it simple to support causes you care about. Create a campaign or donate instantly with a QR code.
+            Donify makes it simple to support causes you care about. Create a campaign or donate instantly with a QR code.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Button asChild size="lg" className="font-bold">
