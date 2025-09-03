@@ -1,0 +1,40 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
+
+export function CursorGradient() {
+  const [mousePosition, setMousePosition] = useState({ x: -200, y: -200 });
+
+  useEffect(() => {
+    const updateMousePosition = (ev: MouseEvent) => {
+      setMousePosition({ x: ev.clientX, y: ev.clientY });
+    };
+
+    window.addEventListener('mousemove', updateMousePosition);
+
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+    };
+  }, []);
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed -left-48 -top-48 z-20 h-96 w-96 rounded-full opacity-50 mix-blend-soft-light blur-3xl"
+      style={{
+        background: 'radial-gradient(circle, hsl(var(--primary)) 20%, transparent 80%)',
+      }}
+      animate={{
+        x: mousePosition.x,
+        y: mousePosition.y,
+      }}
+      transition={{
+        type: 'spring',
+        stiffness: 100,
+        damping: 20,
+        mass: 0.5,
+      }}
+    />
+  );
+}
