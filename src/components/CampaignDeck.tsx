@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Campaign } from '@/lib/types';
 import { CampaignCard } from '@/components/CampaignCard';
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,7 @@ const cardVariants = {
     x: 0,
     opacity: 1,
     scale: 1 - Math.min(index * 0.05, 0.2), // The active card is at scale 1
-    y: index * 20, // Stacking effect
+    y: index * 30, // Increased stacking effect
     zIndex: 10 - index,
     transition: {
       type: 'spring',
@@ -96,7 +96,7 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
                   transformOrigin: 'center center',
                 }}
                 // Pass the relative index to the center animation
-                custom_animate_props={displayIndex}
+                custom={displayIndex}
               >
                   <CampaignCard campaign={campaign} />
                 </motion.div>
@@ -118,15 +118,6 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
         onClick={() => paginate(1)}
       >
         <ChevronRight className="h-6 w-6" />
-      </Button>
-
-      <Button
-        className="absolute z-20 bottom-0 font-bold"
-        onClick={() => paginate(1)}
-        size="lg"
-      >
-        Next Post
-        <ChevronRight className="ml-2" />
       </Button>
     </div>
   );
