@@ -37,6 +37,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const profileFormSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
   bio: z.string().max(200, { message: 'Bio cannot be more than 200 characters.' }).optional(),
 });
 
@@ -56,18 +57,15 @@ export default function ProfilePage() {
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues: {
+    values: {
       name: userProfile.name,
-      bio: userProfile.bio,
-    },
-    values: { // ensures form is pre-filled when dialog opens
-      name: userProfile.name,
+      email: userProfile.email,
       bio: userProfile.bio,
     }
   });
 
   function onSubmit(data: ProfileFormValues) {
-    setUserProfile((prev) => ({ ...prev, name: data.name, bio: data.bio || '' }));
+    setUserProfile((prev) => ({ ...prev, name: data.name, email: data.email, bio: data.bio || '' }));
     toast({
       title: 'Profile Updated',
       description: 'Your profile information has been saved.',
@@ -112,6 +110,19 @@ export default function ProfilePage() {
                         <FormLabel>Name</FormLabel>
                         <FormControl>
                           <Input placeholder="Your Name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="your.email@example.com" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
