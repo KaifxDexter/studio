@@ -1,8 +1,10 @@
 
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion, useAnimation } from 'framer-motion';
 import { HandHeart, Home, PlusCircle, User, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -18,9 +20,37 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const isAuthenticated = false; // Placeholder for auth logic
+  const controls = useAnimation();
+  const [lastY, setLastY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY > lastY && currentY > 100) {
+        // Scrolling down
+        controls.start("hidden");
+      } else {
+        // Scrolling up
+        controls.start("visible");
+      }
+      setLastY(currentY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastY, controls]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-black/10 backdrop-blur-[24px] transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:scale-[1.02]">
+    <motion.header
+      className="sticky top-0 z-50 w-full border-b border-white/20 bg-black/10 backdrop-blur-[24px] transition-transform duration-300 ease-in-out"
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
+      }}
+      initial="visible"
+      animate={controls}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    >
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
@@ -87,6 +117,6 @@ export function Header() {
           ))}
         </nav>
       </div>
-    </header>
+    </motion.header>
   );
 }
