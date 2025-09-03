@@ -10,10 +10,10 @@ import { Button } from '@/components/ui/button';
 
 const cardVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 500 : -500,
+    x: direction > 0 ? 300 : -300,
     opacity: 0,
-    scale: 0.8,
-    rotateY: direction > 0 ? -180 : 180,
+    scale: 0.9,
+    rotateY: direction > 0 ? -45 : 45,
     zIndex: 0,
   }),
   center: (index: number) => ({
@@ -25,20 +25,20 @@ const cardVariants = {
     zIndex: 10 - index,
     transition: {
       type: 'spring',
-      stiffness: 200,
-      damping: 30,
+      stiffness: 100,
+      damping: 20,
     },
   }),
   exit: (direction: number) => ({
-    x: direction < 0 ? 500 : -500,
+    x: direction < 0 ? 300 : -300,
     opacity: 0,
-    scale: 0.8,
-    rotateY: direction < 0 ? 180 : -180,
+    scale: 0.9,
+    rotateY: direction < 0 ? 45 : -45,
     zIndex: 0,
     transition: {
       type: 'spring',
-      stiffness: 200,
-      damping: 30,
+      stiffness: 100,
+      damping: 20,
     },
   }),
 };
@@ -100,6 +100,7 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
                   transformStyle: 'preserve-3d',
                 }}
                 // Pass the relative index to the center animation
+                // @ts-ignore
                 custom={displayIndex}
               >
                   <CampaignCard campaign={campaign} />
