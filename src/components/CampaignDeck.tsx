@@ -12,8 +12,8 @@ const cardVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 300 : -300,
     opacity: 0,
+    rotateY: direction > 0 ? -180 : 180,
     scale: 0.9,
-    rotateY: 180,
     zIndex: 0,
   }),
   center: (index: number) => ({
@@ -32,8 +32,8 @@ const cardVariants = {
   exit: (direction: number) => ({
     x: direction < 0 ? 300 : -300,
     opacity: 0,
+    rotateY: direction < 0 ? 180 : -180,
     scale: 0.9,
-    rotateY: -180,
     zIndex: 0,
     transition: {
       type: 'spring',
@@ -99,7 +99,6 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
                   transformOrigin: 'center center',
                   transformStyle: 'preserve-3d',
                 }}
-                // Pass the relative index to the center animation
                 // @ts-ignore
                 custom={displayIndex}
               >
@@ -127,3 +126,4 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
     </div>
   );
 }
+
