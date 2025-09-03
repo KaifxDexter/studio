@@ -78,8 +78,12 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {campaigns.map((campaign: Campaign) => (
-              <CampaignCard key={campaign.id} campaign={campaign} />
+            {campaigns.map((campaign: Campaign, index: number) => (
+              <CampaignCard 
+                key={campaign.id} 
+                campaign={campaign} 
+                animationDirection={index % 2 === 0 ? 'left' : 'right'}
+              />
             ))}
           </motion.div>
         </div>

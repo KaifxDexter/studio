@@ -19,25 +19,31 @@ import { Badge } from '@/components/ui/badge';
 
 interface CampaignCardProps {
   campaign: Campaign;
+  animationDirection: 'left' | 'right';
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
+const cardVariants = (direction: 'left' | 'right') => ({
+  hidden: {
+    opacity: 0,
+    x: direction === 'left' ? -100 : 100,
+    rotate: direction === 'left' ? -6 : 6,
+  },
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
+    rotate: 0,
     transition: {
       duration: 0.5,
       ease: 'easeOut',
     },
   },
-};
+});
 
-export function CampaignCard({ campaign }: CampaignCardProps) {
+export function CampaignCard({ campaign, animationDirection }: CampaignCardProps) {
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
 
   return (
-    <motion.div variants={cardVariants}>
+    <motion.div variants={cardVariants(animationDirection)}>
       <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 glass-card">
         <CardHeader className="p-0 relative">
           <Link href={`/campaign/${campaign.id}`} className="block">
