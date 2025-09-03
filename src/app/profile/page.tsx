@@ -67,7 +67,7 @@ export default function ProfilePage() {
                       <p className="font-semibold">{donation.title}</p>
                       <p className="text-sm text-muted-foreground">Donated on {new Date().toLocaleDateString()}</p>
                     </div>
-                    <p className="font-bold text-lg text-primary">$50</p>
+                    <p className="font-bold text-lg text-primary">₹500</p>
                   </div>
                  ))
               ) : (

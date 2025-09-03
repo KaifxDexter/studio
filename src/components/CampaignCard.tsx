@@ -48,10 +48,10 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           <Progress value={progress} className="h-2" />
           <div className="flex justify-between text-sm">
             <span className="font-semibold text-foreground">
-              ${campaign.raisedAmount.toLocaleString()}
+              ₹{campaign.raisedAmount.toLocaleString()}
             </span>
             <span className="text-muted-foreground">
-              of ${campaign.targetAmount.toLocaleString()}
+              of ₹{campaign.targetAmount.toLocaleString()}
             </span>
           </div>
         </div>

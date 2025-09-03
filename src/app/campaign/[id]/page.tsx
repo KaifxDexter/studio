@@ -53,10 +53,10 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
                 <Progress value={progress} className="h-3" />
                 <div className="flex justify-between items-baseline">
                   <span className="text-2xl font-bold text-primary">
-                    ${campaign.raisedAmount.toLocaleString()}
+                    ₹{campaign.raisedAmount.toLocaleString()}
                   </span>
                   <span className="text-sm text-muted-foreground">
-                    raised of ${campaign.targetAmount.toLocaleString()}
+                    raised of ₹{campaign.targetAmount.toLocaleString()}
                   </span>
                 </div>
               </div>
