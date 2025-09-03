@@ -23,7 +23,7 @@ const cardVariants = {
     zIndex: 10 - index,
     transition: {
       type: 'spring',
-      stiffness: 300,
+      stiffness: 200, // Reduced from 300
       damping: 30,
     },
   }),
@@ -34,7 +34,7 @@ const cardVariants = {
     zIndex: 0,
     transition: {
       type: 'spring',
-      stiffness: 300,
+      stiffness: 200, // Reduced from 300
       damping: 30,
     },
   }),
