@@ -32,8 +32,8 @@ export function CursorGradient() {
       }}
       transition={{
         type: 'spring',
-        stiffness: 100,
-        damping: 20,
+        stiffness: 250,
+        damping: 25,
         mass: 0.5,
       }}
     />
