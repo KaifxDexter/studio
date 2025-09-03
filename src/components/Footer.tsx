@@ -4,7 +4,7 @@ import { Logo } from '@/components/Logo';
 
 export function Footer() {
   return (
-    <footer className="border-t mt-auto pb-16 md:pb-0 border-white/10 bg-background/30 backdrop-blur-lg">
+    <footer className="border-t mt-auto pb-16 md:pb-0 border-white/20 bg-black/10 backdrop-blur-[24px]">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
