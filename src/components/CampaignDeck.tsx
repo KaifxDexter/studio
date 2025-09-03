@@ -13,7 +13,7 @@ const cardVariants = {
     x: direction > 0 ? 300 : -300,
     opacity: 0,
     scale: 0.9,
-    rotateY: direction > 0 ? -45 : 45,
+    rotateY: 180,
     zIndex: 0,
   }),
   center: (index: number) => ({
@@ -33,7 +33,7 @@ const cardVariants = {
     x: direction < 0 ? 300 : -300,
     opacity: 0,
     scale: 0.9,
-    rotateY: direction < 0 ? 45 : -45,
+    rotateY: -180,
     zIndex: 0,
     transition: {
       type: 'spring',
