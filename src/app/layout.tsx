@@ -31,14 +31,7 @@ export default function RootLayout({
       <body className={cn('font-body antialiased flex flex-col min-h-screen bg-background')}>
          <CursorGradient />
          <div className="fixed top-0 left-0 w-full h-full -z-10 bg-black">
-           <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
-                backgroundSize: '4rem 4rem',
-              }}
-            />
+           
          </div>
         <Header />
         <main className="flex-grow">{children}</main>
@@ -48,3 +41,4 @@ export default function RootLayout({
     </html>
   );
 }
+
