@@ -10,7 +10,7 @@ export function Footer() {
             <Logo />
           </div>
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            &copy; {new Date().getFullYear()} FundScan. All rights reserved.
+            &copy; {new Date().getFullYear()} FundMe. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link href="#" className="text-sm text-muted-foreground hover:text-primary">

@@ -14,7 +14,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
   }
 
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
-  const upiUrl = `upi://pay?pa=fundraiser@upi&pn=FundScan&tn=Donation for ${encodeURIComponent(campaign.title)}&tr=${campaign.id}`;
+  const upiUrl = `upi://pay?pa=fundraiser@upi&pn=FundMe&tn=Donation for ${encodeURIComponent(campaign.title)}&tr=${campaign.id}`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiUrl)}&size=256x256&bgcolor=F9E7D9`;
 
   return (

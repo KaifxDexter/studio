@@ -57,7 +57,7 @@ export default function SignupPage() {
             <Logo />
           </div>
           <CardTitle className="text-2xl font-headline">Create an Account</CardTitle>
-          <CardDescription>Join FundScan and start making a difference today.</CardDescription>
+          <CardDescription>Join FundMe and start making a difference today.</CardDescription>
         </CardHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>

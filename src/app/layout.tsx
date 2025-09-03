@@ -6,7 +6,7 @@ import { Footer } from '@/components/Footer';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'FundScan - Empower Change, One Scan at a Time',
+  title: 'FundMe - Empower Change, One Scan at a Time',
   description: 'A fundraising platform to support various causes through simple QR code donations.',
 };
 
