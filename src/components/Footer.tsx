@@ -14,9 +14,10 @@ export function Footer() {
           <div className="flex-grow md:flex-grow-0 md:absolute md:left-1/2 md:-translate-x-1/2">
              <SocialBubbles />
           </div>
-          <p className="text-sm text-muted-foreground text-center md:text-left">
-            &copy; {new Date().getFullYear()} Donify. All rights reserved.
-          </p>
+          <div className="text-sm text-muted-foreground text-center md:text-right">
+            <p>&copy; 2025 Donify. All rights reserved.</p>
+            <p>Made by M Kaif Ansari</p>
+          </div>
         </div>
       </div>
     </footer>
