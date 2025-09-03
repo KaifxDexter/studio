@@ -30,9 +30,6 @@ export default function RootLayout({
       </head>
       <body className={cn('font-body antialiased flex flex-col min-h-screen bg-background')}>
          <CursorGradient />
-         <div className="fixed top-0 left-0 w-full h-full -z-10 bg-black">
-           
-         </div>
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
@@ -41,4 +38,3 @@ export default function RootLayout({
     </html>
   );
 }
-
