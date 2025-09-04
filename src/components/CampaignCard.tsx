@@ -59,7 +59,7 @@ export function CampaignCard({ campaign, animationDirection }: CampaignCardProps
               width={600}
               height={400}
               className="w-full h-48 object-cover rounded-t-lg"
-              data-ai-hint="fundraising event"
+              data-ai-hint={campaign.aiHint}
             />
           </Link>
           <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>

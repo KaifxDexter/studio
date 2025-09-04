@@ -10,4 +10,5 @@ export interface Campaign {
   raisedAmount: number;
   fundraiserName: string;
   cause: CampaignCause;
+  aiHint: string;
 }

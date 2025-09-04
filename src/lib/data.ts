@@ -11,6 +11,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 22500,
     fundraiserName: 'Global Relief Foundation',
     cause: 'Disaster Relief',
+    aiHint: 'flood relief',
   },
   {
     id: '2',
@@ -22,6 +23,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 61000,
     fundraiserName: 'Friends of Priya',
     cause: 'Medical',
+    aiHint: 'sick child',
   },
   {
     id: '3',
@@ -33,6 +35,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 8200,
     fundraiserName: 'Educate Future Foundation',
     cause: 'Education',
+    aiHint: 'rural school',
   },
   {
     id: '4',
@@ -44,6 +47,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 14500,
     fundraiserName: 'Street Paws Rescue',
     cause: 'Personal',
+    aiHint: 'stray dog',
   },
   {
     id: '5',
@@ -55,6 +59,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 3000,
     fundraiserName: 'Creative Futures Collective',
     cause: 'Personal',
+    aiHint: 'art exhibition',
   },
   {
     id: '6',
@@ -66,6 +71,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 15000,
     fundraiserName: 'Water for Life Initiative',
     cause: 'Disaster Relief',
+    aiHint: 'clean water',
   },
   {
     id: '7',
@@ -77,6 +83,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 11200,
     fundraiserName: 'Rajasthan Education Trust',
     cause: 'Education',
+    aiHint: 'digital classroom',
   },
   {
     id: '8',
@@ -88,6 +95,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 42000,
     fundraiserName: 'Bengal Health Initiative',
     cause: 'Medical',
+    aiHint: 'mobile clinic',
   },
   {
     id: '9',
@@ -99,6 +107,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 37500,
     fundraiserName: 'Odisha Rebuilds',
     cause: 'Disaster Relief',
+    aiHint: 'cyclone relief',
   },
   {
     id: '10',
@@ -110,6 +119,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 9800,
     fundraiserName: 'Friends of the People\'s Library',
     cause: 'Personal',
+    aiHint: 'community library',
   },
   {
     id: '11',
@@ -121,6 +131,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 5500,
     fundraiserName: 'Green Aravalli',
     cause: 'Education',
+    aiHint: 'reforestation drive',
   },
   {
     id: '12',
@@ -132,6 +143,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 71000,
     fundraiserName: 'Save Rohan\'s Heart',
     cause: 'Medical',
+    aiHint: 'child surgery',
   },
   {
     id: '13',
@@ -143,6 +155,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 11500,
     fundraiserName: 'Delhi Winter Care',
     cause: 'Disaster Relief',
+    aiHint: 'homeless winter',
   },
   {
     id: '14',
@@ -154,6 +167,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 12500,
     fundraiserName: 'UP Women Empowerment',
     cause: 'Personal',
+    aiHint: 'vocational training',
   },
   {
     id: '15',
@@ -165,6 +179,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 28000,
     fundraiserName: 'Mobility India Foundation',
     cause: 'Medical',
+    aiHint: 'prosthetic limb',
   },
   {
     id: '16',
@@ -176,6 +191,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 7800,
     fundraiserName: 'Rajasthan Heritage Fund',
     cause: 'Personal',
+    aiHint: 'folk artists',
   },
   {
     id: '17',
@@ -187,6 +203,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 19500,
     fundraiserName: 'Chennai Science Initiative',
     cause: 'Education',
+    aiHint: 'science lab',
   },
   {
     id: '18',
@@ -198,6 +215,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 31000,
     fundraiserName: 'Farmer Aid Maharashtra',
     cause: 'Disaster Relief',
+    aiHint: 'drought relief',
   },
   {
     id: '19',
@@ -209,6 +227,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 25000,
     fundraiserName: 'Himalayan Light Project',
     cause: 'Education',
+    aiHint: 'solar panels',
   },
   {
     id: '20',
@@ -220,6 +239,7 @@ export const campaigns: Campaign[] = [
     raisedAmount: 14000,
     fundraiserName: 'Student Wellness Network',
     cause: 'Medical',
+    aiHint: 'mental health',
   },
   {
     id: '21',
@@ -231,5 +251,6 @@ export const campaigns: Campaign[] = [
     raisedAmount: 11000,
     fundraiserName: 'Varanasi Weaver Trust',
     cause: 'Personal',
+    aiHint: 'silk weaving',
   },
 ];
