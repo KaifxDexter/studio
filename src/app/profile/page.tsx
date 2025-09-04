@@ -45,8 +45,8 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 const defaultProfile = {
-  name: 'Jane Doe',
-  email: 'jane.doe@example.com',
+  name: 'Your Name',
+  email: 'your.email@example.com',
   bio: 'Passionate about leveraging technology to create positive social impact. Believer in community and kindness.',
 };
 

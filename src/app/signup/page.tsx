@@ -70,7 +70,7 @@ export default function SignupPage() {
                   <FormItem>
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} />
+                      <Input placeholder="Your Full Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
