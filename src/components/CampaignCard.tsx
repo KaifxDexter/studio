@@ -64,27 +64,29 @@ export function CampaignCard({ campaign, animationDirection }: CampaignCardProps
             <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
           </Link>
         </CardHeader>
-        <CardContent className="flex-grow p-4">
+        <div className="p-4 flex flex-col flex-grow">
           <CardTitle className="text-lg font-bold leading-snug mb-2 line-clamp-2 h-[56px]">
             <Link href={`/campaign/${campaign.id}`} className="hover:text-primary transition-colors">
               {campaign.title}
             </Link>
           </CardTitle>
-          <p className="text-sm text-muted-foreground line-clamp-3 h-[60px]">
-            {campaign.description}
-          </p>
-          <div className="mt-4 space-y-2">
-            <Progress value={progress} className="h-2" />
-            <div className="flex justify-between text-sm">
-              <span className="font-semibold text-foreground">
-                ₹{campaign.raisedAmount.toLocaleString()}
-              </span>
-              <span className="text-muted-foreground">
-                of ₹{campaign.targetAmount.toLocaleString()}
-              </span>
+          <CardContent className="p-0 flex-grow">
+            <p className="text-sm text-muted-foreground line-clamp-3 h-[60px]">
+              {campaign.description}
+            </p>
+            <div className="mt-4 space-y-2">
+              <Progress value={progress} className="h-2" />
+              <div className="flex justify-between text-sm">
+                <span className="font-semibold text-foreground">
+                  ₹{campaign.raisedAmount.toLocaleString()}
+                </span>
+                <span className="text-muted-foreground">
+                  of ₹{campaign.targetAmount.toLocaleString()}
+                </span>
+              </div>
             </div>
-          </div>
-        </CardContent>
+          </CardContent>
+        </div>
         <CardFooter className="p-4 pt-0">
           <Button asChild className="w-full font-bold">
             <Link href={`/campaign/${campaign.id}`}>Donate Now</Link>
