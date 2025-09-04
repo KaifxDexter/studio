@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 const socialLinks = [
   { icon: Facebook, href: '#', name: 'Facebook' },
   { icon: Twitter, href: '#', name: 'Twitter' },
-  { icon: Instagram, href: '#', name: 'Instagram' },
+  { icon: Instagram, href: 'https://www.instagram.com/kaif.________________?igsh=ZHlhY3VsbHJvdnVw&utm_source=qr', name: 'Instagram' },
   { icon: Linkedin, href: '#', name: 'LinkedIn' },
   { icon: Github, href: '#', name: 'GitHub' },
 ];
