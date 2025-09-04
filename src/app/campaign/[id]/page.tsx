@@ -33,15 +33,17 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
             </div>
           </div>
           <Card className="mb-8 overflow-hidden glass-card">
-            <Image
-              src={campaign.imageUrl}
-              alt={campaign.title}
-              width={800}
-              height={500}
-              className="w-full h-auto object-cover"
-              data-ai-hint={campaign.aiHint}
-              priority
-            />
+            <div className="aspect-video overflow-hidden">
+              <Image
+                src={campaign.imageUrl}
+                alt={campaign.title}
+                width={800}
+                height={500}
+                className="w-full h-full object-cover"
+                data-ai-hint={campaign.aiHint}
+                priority
+              />
+            </div>
           </Card>
           <div className="prose dark:prose-invert max-w-none text-base md:text-lg">
             <p>{campaign.fullDescription}</p>

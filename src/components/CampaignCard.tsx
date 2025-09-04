@@ -50,17 +50,19 @@ export function CampaignCard({ campaign, animationDirection }: CampaignCardProps
       custom={animationDirection}
       className="h-full"
     >
-      <Card className="flex flex-col h-full w-full transition-all duration-300 glass-card">
+      <Card className="flex flex-col h-full w-full transition-all duration-300 glass-card overflow-hidden">
         <CardHeader className="p-0">
           <Link href={`/campaign/${campaign.id}`} className="block relative">
-            <Image
-              src={campaign.imageUrl}
-              alt={campaign.title}
-              width={600}
-              height={400}
-              className="w-full h-auto object-cover rounded-t-lg"
-              data-ai-hint={campaign.aiHint}
-            />
+            <div className="aspect-video overflow-hidden">
+              <Image
+                src={campaign.imageUrl}
+                alt={campaign.title}
+                width={600}
+                height={400}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                data-ai-hint={campaign.aiHint}
+              />
+            </div>
             <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
           </Link>
         </CardHeader>
