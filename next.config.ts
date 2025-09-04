@@ -1,3 +1,4 @@
+
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
@@ -35,7 +36,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https,'
         hostname: 'sdmntprwestus.oaiusercontent.com',
         port: '',
         pathname: '/**',
@@ -51,5 +52,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
-    
