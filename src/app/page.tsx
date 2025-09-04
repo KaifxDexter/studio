@@ -36,7 +36,7 @@ export default function Home() {
           <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground">
             Donify makes it simple to support causes you care about. Create a campaign or donate instantly with a QR code.
           </p>
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="font-bold">
               <Link href="/create">
                 Start a Campaign <ArrowRight className="ml-2" />

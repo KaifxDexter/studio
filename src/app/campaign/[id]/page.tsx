@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { campaigns } from '@/lib/data';
@@ -42,7 +43,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
               priority
             />
           </Card>
-          <div className="prose dark:prose-invert max-w-none text-lg">
+          <div className="prose dark:prose-invert max-w-none text-base md:text-lg">
             <p>{campaign.fullDescription}</p>
           </div>
         </div>

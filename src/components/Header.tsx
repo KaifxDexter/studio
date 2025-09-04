@@ -52,11 +52,12 @@ export function Header() {
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
       <div className="container flex h-16 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Logo />
-          </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+        <div className="flex-1 md:flex-none">
+            <Link href="/" className="mr-6 flex items-center space-x-2">
+                <Logo />
+            </Link>
+        </div>
+        <nav className="hidden md:flex flex-1 items-center space-x-6 text-sm font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -69,17 +70,9 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-          </nav>
-        </div>
-
-        {/* Mobile Nav */}
-        <div className="md:hidden">
-          <Link href="/" className="flex items-center space-x-2">
-            <Logo />
-          </Link>
-        </div>
+        </nav>
         
-        <div className="flex flex-1 items-center justify-end space-x-2">
+        <div className="flex items-center justify-end space-x-2">
           {isAuthenticated ? (
             <Button asChild variant="ghost" size="icon">
               <Link href="/profile">
@@ -107,7 +100,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                'flex flex-col items-center gap-1 transition-colors hover:text-primary',
+                'flex flex-col items-center gap-1 transition-colors hover:text-primary w-full text-center py-2',
                 pathname === link.href ? 'text-primary' : 'text-muted-foreground'
               )}
             >
