@@ -78,7 +78,7 @@ export const campaigns: Campaign[] = [
     title: 'Digital Classrooms for a Village School in Rajasthan',
     description: 'Help us equip a rural school in Rajasthan with smart boards and tablets to bridge the digital divide.',
     fullDescription: 'We believe that every child deserves a modern education. This project aims to bring digital learning to a government school in a remote village in Rajasthan, providing students with tools that will prepare them for the future. The funds will be used to purchase interactive smart boards, tablets for students, and provide training for teachers.',
-    imageUrl: 'https://storage.googleapis.com/studiogpt-test-project.appspot.com/6a80c655-333e-468c-905c-59f77f523c99.jpeg',
+    imageUrl: 'https://sdmntprukwest.oaiusercontent.com/files/00000000-4624-6243-ba3b-61253c3e5f59/raw?se=2025-09-04T08%3A51%3A16Z&sp=r&sv=2024-08-04&sr=b&scid=d8cdfcd0-8d7a-5ebe-b060-bfb0ce507600&skoid=5939c452-ea83-4420-b5b4-21182254a5d3&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-03T22%3A13%3A35Z&ske=2025-09-04T22%3A13%3A35Z&sks=b&skv=2024-08-04&sig=40%2BxbC3U8wauT8/9gdgapJYxZAB9qPeNwW03qiqIPdY%3D',
     targetAmount: 35000,
     raisedAmount: 11200,
     fundraiserName: 'Rajasthan Education Trust',
