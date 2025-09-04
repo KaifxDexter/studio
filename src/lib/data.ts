@@ -6,7 +6,7 @@ export const campaigns: Campaign[] = [
     title: 'Support for Flood Victims in the North',
     description: 'Urgent funds needed to provide shelter, food, and medical supplies to families affected by the recent devastating floods.',
     fullDescription: 'The recent floods in the northern regions have left thousands of families displaced and without basic necessities. Homes have been washed away, and livelihoods have been destroyed. We are on the ground providing immediate relief, but we need your help. Your donation will provide emergency shelter kits, clean drinking water, non-perishable food items, and essential medical care to those in desperate need. Every contribution, no matter how small, makes a significant impact in helping these communities rebuild their lives.',
-    imageUrl: 'https://storage.googleapis.com/studiogpt-test-project.appspot.com/9d201a35-e5da-4648-af73-b23541c59491.jpeg',
+    imageUrl: 'https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-2c98-622f-9175-b6386bb0c36b/raw?se=2025-09-04T09%3A11%3A18Z&sp=r&sv=2024-08-04&sr=b&scid=3adf240c-9425-5d3b-93b0-fa99aa97b924&skoid=5939c452-ea83-4420-b5b4-21182254a5d3&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-03T19%3A45%3A18Z&ske=2025-09-04T19%3A45%3A18Z&sks=b&skv=2024-08-04&sig=TXGsDsCSE7v8P9HbE4lLGOA8JwHH2AmKsjnnLCf8Bds%3D',
     targetAmount: 50000,
     raisedAmount: 22500,
     fundraiserName: 'Global Relief Foundation',
