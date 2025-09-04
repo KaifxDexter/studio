@@ -130,7 +130,7 @@
     content: '';
     position: absolute;
     inset: -2px;
-    border-radius: inherit;
+    border-radius: inherit; /* This makes the glow inherit the container's border-radius */
     background-image: conic-gradient(
       from var(--angle, 0deg),
       hsl(var(--primary) / 0.8),

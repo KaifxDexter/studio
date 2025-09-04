@@ -70,6 +70,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
                   alt="Donation QR Code"
                   width={256}
                   height={256}
+                  className="rounded-md"
                   unoptimized // QR code from external API
                 />
               </div>
