@@ -78,7 +78,7 @@ export const campaigns: Campaign[] = [
     title: 'Digital Classrooms for a Village School in Rajasthan',
     description: 'Help us equip a rural school in Rajasthan with smart boards and tablets to bridge the digital divide.',
     fullDescription: 'We believe that every child deserves a modern education. This project aims to bring digital learning to a government school in a remote village in Rajasthan, providing students with tools that will prepare them for the future. The funds will be used to purchase interactive smart boards, tablets for students, and provide training for teachers.',
-    imageUrl: 'https://picsum.photos/600/400?random=7',
+    imageUrl: 'https://storage.googleapis.com/studiogpt-test-project.appspot.com/6a80c655-333e-468c-905c-59f77f523c99.jpeg',
     targetAmount: 35000,
     raisedAmount: 11200,
     fundraiserName: 'Rajasthan Education Trust',
@@ -254,3 +254,5 @@ export const campaigns: Campaign[] = [
     aiHint: 'silk weaving',
   },
 ];
+
+    
