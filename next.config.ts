@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https,'
+        protocol: 'https',
         hostname: 'sdmntprwestus.oaiusercontent.com',
         port: '',
         pathname: '/**',
