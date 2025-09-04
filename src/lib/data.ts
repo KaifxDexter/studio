@@ -137,7 +137,7 @@ export const campaigns: Campaign[] = [
     id: '12',
     title: 'Life-Saving Surgery for a Child in Mumbai',
     description: 'Help 5-year-old Rohan get the urgent open-heart surgery he needs to survive.',
-    fullDescription: 'Rohan was born with a critical congenital heart defect and needs immediate surgery to save his life. His family works as daily wage earners and cannot afford the high cost of the operation. Every rupee brings us closer to giving this child a chance at a healthy future.',
+    fullDescription: 'Rohan was born with a critical congenital heart defect and needs immediate surgery to save his life. His family works as a daily wage earners and cannot afford the high cost of the operation. Every rupee brings us closer to giving this child a chance at a healthy future.',
     imageUrl: 'https://picsum.photos/600/400?random=12',
     targetAmount: 90000,
     raisedAmount: 71000,
@@ -254,6 +254,3 @@ export const campaigns: Campaign[] = [
     aiHint: 'silk weaving',
   },
 ];
-
-    
-    
