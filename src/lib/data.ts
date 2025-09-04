@@ -183,7 +183,7 @@ export const campaigns: Campaign[] = [
     id: '15',
     title: 'Prosthetic Limbs for Landmine Victims',
     description: 'Provide high-quality prosthetic limbs to amputees in conflict-affected regions, giving them the gift of mobility.',
-    fullDescription: 'In many parts of our country, unexploded landmines continue to injure innocent civilians long after conflicts have ended. This campaign provides custom-fitted, high-quality prosthetic limbs to those who have lost their legs or arms, helping them regain their independence, dignity, and ability to work.',
+    fullDescription: 'In many parts of our country, unexploded landmines continue to injure innocent civilians long after conflicts have ended. This campaign provides custom-fitted, high-quality prosthetic limbs to those who have lost their arms or legs, helping them regain their independence, dignity, and ability to work.',
     imageUrl: 'https://picsum.photos/600/400?random=15',
     targetAmount: 60000,
     raisedAmount: 28000,

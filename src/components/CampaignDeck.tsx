@@ -110,7 +110,7 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
       <Button
         variant="outline"
         size="icon"
-        className="absolute z-20 -left-4 md:-left-8 top-1/2 -translate-y-1/2 rounded-full h-12 w-12 bg-black/30 backdrop-blur-md"
+        className="absolute z-20 -left-8 md:-left-16 top-1/2 -translate-y-1/2 rounded-full h-12 w-12 bg-black/30 backdrop-blur-md"
         onClick={() => paginate(-1)}
       >
         <ChevronLeft className="h-6 w-6" />
@@ -118,7 +118,7 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
       <Button
         variant="outline"
         size="icon"
-        className="absolute z-20 -right-4 md:-right-8 top-1/2 -translate-y-1/2 rounded-full h-12 w-12 bg-black/30 backdrop-blur-md"
+        className="absolute z-20 -right-8 md:-right-16 top-1/2 -translate-y-1/2 rounded-full h-12 w-12 bg-black/30 backdrop-blur-md"
         onClick={() => paginate(1)}
       >
         <ChevronRight className="h-6 w-6" />
@@ -126,5 +126,3 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
     </div>
   );
 }
-
-

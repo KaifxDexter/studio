@@ -67,7 +67,7 @@ export function CampaignCard({ campaign, animationDirection }: CampaignCardProps
           </Link>
         </CardHeader>
         <div className="p-4 flex flex-col flex-grow">
-          <CardTitle className="text-lg font-bold leading-snug mb-2 line-clamp-2 h-[56px]">
+          <CardTitle className="text-lg font-bold leading-snug mb-2">
             <Link href={`/campaign/${campaign.id}`} className="hover:text-primary transition-colors">
               {campaign.title}
             </Link>
