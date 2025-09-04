@@ -16,7 +16,9 @@ export function Footer() {
           </div>
           <div className="text-sm text-muted-foreground text-center md:text-right">
             <p>&copy; 2025 Donify. All rights reserved.</p>
-            <p>Made by M Kaif Ansari</p>
+            <a href="https://donify.in" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              Made by M Kaif Ansari
+            </a>
           </div>
         </div>
       </div>
