@@ -1,5 +1,14 @@
 
-import type { Campaign } from './types';
+import type { Campaign, NavLink } from './types';
+import { Home, PlusCircle, Mail, User } from 'lucide-react';
+
+
+export const navLinks: NavLink[] = [
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/create', label: 'Create', icon: PlusCircle },
+  { href: '/contact', label: 'Contact', icon: Mail },
+  { href: '/profile', label: 'Profile', icon: User },
+];
 
 export const campaigns: Campaign[] = [
   {

@@ -6,6 +6,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import './globals.css';
 import { CursorGradient } from '@/components/CursorGradient';
+import { MobileNav } from '@/components/MobileNav';
 
 export const metadata: Metadata = {
   title: 'Donify - Empower Change, One Scan at a Time',
@@ -34,6 +35,7 @@ export default function RootLayout({
         <main className="flex-grow pb-20 md:pb-0">{children}</main>
         <Footer />
         <Toaster />
+        <MobileNav />
       </body>
     </html>
   );
