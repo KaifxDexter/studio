@@ -51,18 +51,18 @@ export function CampaignCard({ campaign, animationDirection }: CampaignCardProps
       className="h-full"
     >
       <Card className="flex flex-col h-full w-full transition-all duration-300 glass-card">
-        <CardHeader className="p-0 relative">
-          <Link href={`/campaign/${campaign.id}`} className="block">
+        <CardHeader className="p-0">
+          <Link href={`/campaign/${campaign.id}`} className="block relative">
             <Image
               src={campaign.imageUrl}
               alt={campaign.title}
               width={600}
               height={400}
-              className="w-full h-48 object-cover rounded-t-lg"
+              className="w-full h-auto object-cover rounded-t-lg"
               data-ai-hint={campaign.aiHint}
             />
+            <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
           </Link>
-          <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
         </CardHeader>
         <CardContent className="flex-grow p-4">
           <CardTitle className="text-lg font-bold leading-snug mb-2 line-clamp-2 h-[56px]">
