@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={cn('font-body antialiased flex flex-col min-h-screen bg-background')}>
          <CursorGradient />
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow pb-20 md:pb-0">{children}</main>
         <Footer />
         <Toaster />
       </body>
