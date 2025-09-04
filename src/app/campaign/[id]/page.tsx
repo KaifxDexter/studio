@@ -15,7 +15,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
   }
 
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
-  const upiUrl = `upi://pay?pa=fundraiser@upi&pn=Donify&tn=Donation for ${encodeURIComponent(campaign.title)}&tr=${campaign.id}`;
+  const upiUrl = `upi://pay?pa=kaifnabeel125@oksbi&pn=Mohd Kaif&tn=Donation for ${encodeURIComponent(campaign.title)}&tr=${campaign.id}`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiUrl)}&size=256x256&bgcolor=F9E7D9`;
 
   return (
@@ -64,7 +64,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
             </CardHeader>
             <CardContent className="text-center">
               <h3 className="text-lg font-semibold mb-4">Donate via any UPI App</h3>
-              <div className="p-4 bg-white/90 rounded-lg inline-block">
+              <div className="p-1 bg-white/90 rounded-lg inline-block qr-code-container">
                 <Image
                   src={qrCodeUrl}
                   alt="Donation QR Code"
