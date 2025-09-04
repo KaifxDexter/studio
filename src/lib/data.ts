@@ -18,7 +18,7 @@ export const campaigns: Campaign[] = [
     title: 'Help Priya Fight a Rare Medical Condition',
     description: 'Priya, a 10-year-old girl, is battling a rare disease. Her family needs help to cover the costs of her treatment.',
     fullDescription: 'Priya has been diagnosed with a rare genetic disorder that requires ongoing specialized treatment not covered by insurance. Her family has exhausted their savings, and they are now facing the immense financial burden of her medical bills. The treatment is crucial for her quality of life and future. We are raising funds to cover her hospital stays, medication, and therapy sessions. Your support can give Priya a fighting chance and bring hope to her family during this incredibly difficult time.',
-    imageUrl: 'https://picsum.photos/600/400?random=2',
+    imageUrl: 'https://sdmntprwestus.oaiusercontent.com/files/00000000-2e54-6230-bfa2-b4da781fc4b9/raw?se=2025-09-04T09%3A02%3A31Z&sp=r&sv=2024-08-04&sr=b&scid=c0b58591-cfd7-5f93-a6fd-04025e4c15a9&skoid=03727f49-62d3-42ac-8350-1c0e6559d238&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-03T22%3A07%3A44Z&ske=2025-09-04T22%3A07%3A44Z&sks=b&skv=2024-08-04&sig=4t9eobAWUDnA8UmtVryEBCFav/tECv%2Bi2EN5vteLBYE%3D',
     targetAmount: 75000,
     raisedAmount: 61000,
     fundraiserName: 'Friends of Priya',
@@ -255,4 +255,5 @@ export const campaigns: Campaign[] = [
   },
 ];
 
+    
     
