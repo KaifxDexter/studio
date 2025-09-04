@@ -1,3 +1,4 @@
+
 import type { Campaign } from './types';
 
 export const campaigns: Campaign[] = [
@@ -66,7 +67,7 @@ export const campaigns: Campaign[] = [
     title: 'Clean Water Project for a Community in Need',
     description: 'Fund the installation of a new well and water purification system for a village without access to clean drinking water.',
     fullDescription: 'Access to clean water is a basic human right, yet many communities still struggle to find it. We have identified a village where residents, mostly children and women, walk several miles each day to collect water from a contaminated source, leading to widespread waterborne diseases. This project will fund the drilling of a new deep-water well and the installation of a solar-powered purification system. This will provide the entire community with a sustainable source of safe, clean drinking water, dramatically improving health and quality of life.',
-    imageUrl: 'https://storage.googleapis.com/studiogpt-test-project.appspot.com/a9c1e7a0-2f16-4354-9e32-0c9f138865df.jpeg',
+    imageUrl: 'https://sdmntprwestus.oaiusercontent.com/files/00000000-1f24-6230-9e43-5a5e27099bd9/raw?se=2025-09-04T09%3A10%3A38Z&sp=r&sv=2024-08-04&sr=b&scid=8dd6701d-45ad-56c6-a931-e281c89db84a&skoid=03727f49-62d3-42ac-8350-1c0e6559d238&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-03T21%3A45%3A21Z&ske=2025-09-04T21%3A45%3A21Z&sks=b&skv=2024-08-04&sig=ad1A1PfVDBaqdSmp1uVwoWZgkFWEZ%2BhtDMrJBw9gbrc%3D',
     targetAmount: 40000,
     raisedAmount: 15000,
     fundraiserName: 'Water for Life Initiative',
