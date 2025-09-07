@@ -28,7 +28,6 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Wand2 } from 'lucide-react';
-import { generateDescriptionAction } from '../actions';
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -73,18 +72,45 @@ export default function CreateCampaignPage() {
   const handleGenerateDescription = () => {
     const { title, cause, targetAmount } = form.getValues();
 
+    if (!title || !cause || !targetAmount) {
+      toast({
+        title: 'Missing Information',
+        description: 'Please provide a title, cause, and target amount to generate a description.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     startTransition(async () => {
-      const result = await generateDescriptionAction({ title, cause, targetAmount });
-      if (result.success && result.description) {
-        form.setValue('description', result.description);
-        toast({
-          title: 'Description Generated',
-          description: 'The AI has generated a description for your campaign.',
+      try {
+        const response = await fetch('/api/generate-description', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ title, cause, targetAmount }),
         });
-      } else {
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          form.setValue('description', result.description);
+          toast({
+            title: 'Description Generated',
+            description: 'The AI has generated a description for your campaign.',
+          });
+        } else {
+          toast({
+            title: 'Generation Failed',
+            description: result.error || 'Could not generate a description.',
+            variant: 'destructive',
+          });
+        }
+      } catch (error) {
+        console.error(error);
         toast({
           title: 'Generation Failed',
-          description: result.error || 'Could not generate a description.',
+          description: 'An unexpected error occurred.',
           variant: 'destructive',
         });
       }
