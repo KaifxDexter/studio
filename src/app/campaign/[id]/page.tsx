@@ -42,6 +42,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
                 className="w-full h-full object-cover"
                 data-ai-hint={campaign.aiHint}
                 priority
+                unoptimized
               />
             </div>
           </Card>

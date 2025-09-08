@@ -104,7 +104,7 @@ export default function ProfilePage() {
     <div className="container mx-auto px-4 py-8 md:py-16">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
         <Avatar className="h-24 w-24 md:h-32 md:w-32 border-4 border-primary/50">
-          <AvatarImage src="https://picsum.photos/200" alt="User" data-ai-hint="user avatar" />
+          <AvatarImage src="https://picsum.photos/200" alt="User" data-ai-hint="user avatar" unoptimized />
           <AvatarFallback>
             <User className="h-12 w-12" />
           </AvatarFallback>
