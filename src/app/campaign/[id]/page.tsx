@@ -1,3 +1,4 @@
+
 import { CampaignDetailsClient } from '@/components/CampaignDetailsClient';
 
 // This is the main page component (a Server Component).
