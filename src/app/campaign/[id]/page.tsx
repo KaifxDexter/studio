@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { useCampaigns } from '@/hooks/use-campaigns';
 import type { Campaign } from '@/lib/types';
+import { campaigns as staticCampaigns } from '@/lib/data';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,10 +15,16 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
-// This page is now fully dynamic to support campaigns created on the client.
-export const dynamic = 'force-dynamic';
+// This function is required for static export with dynamic routes.
+// It tells Next.js which pages to pre-render at build time.
+export async function generateStaticParams() {
+  return staticCampaigns.map((campaign) => ({
+    id: campaign.id,
+  }));
+}
 
 function CampaignDetailsClient({ id }: { id: string }) {
   const allCampaigns = useCampaigns();
