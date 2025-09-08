@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateCampaignDescription, type GenerateCampaignDescriptionInput } from '@/ai/flows/generate-campaign-description';
+import { generateCampaignLongDescription, type GenerateCampaignLongDescriptionInput } from '@/ai/flows/generate-campaign-long-description';
 import { z } from 'zod';
 
 const AiInputSchema = z.object({
@@ -9,17 +10,35 @@ const AiInputSchema = z.object({
   additionalDetails: z.string().optional(),
 });
 
+const AiLongDescriptionInputSchema = z.object({
+  title: z.string().min(1, 'Title is required.'),
+  shortDescription: z.string().min(1, 'Short description is required.'),
+});
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const validation = AiInputSchema.safeParse(body);
     
+    // Check if it's a request for a long description
+    if (body.shortDescription) {
+      const validation = AiLongDescriptionInputSchema.safeParse(body);
+      if (!validation.success) {
+        return NextResponse.json({ success: false, error: validation.error.errors.map(e => e.message).join(' ') }, { status: 400 });
+      }
+      const result = await generateCampaignLongDescription(validation.data as GenerateCampaignLongDescriptionInput);
+      if (result && result.longDescription) {
+        return NextResponse.json({ success: true, description: result.longDescription });
+      }
+      return NextResponse.json({ success: false, error: 'AI model did not return a long description.' }, { status: 500 });
+    }
+
+    // Original functionality for short description
+    const validation = AiInputSchema.safeParse(body);
     if (!validation.success) {
       return NextResponse.json({ success: false, error: validation.error.errors.map(e => e.message).join(' ') }, { status: 400 });
     }
 
     const result = await generateCampaignDescription(validation.data as GenerateCampaignDescriptionInput);
-    
     if (result && result.description) {
       return NextResponse.json({ success: true, description: result.description });
     }

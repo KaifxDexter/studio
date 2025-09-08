@@ -1,6 +1,6 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useTransition, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -49,7 +49,8 @@ const formSchema = z.object({
 export default function CreateCampaignPage() {
   const { toast } = useToast();
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [isAiPending, startAiTransition] = useTransition();
+  const [isSubmitPending, startSubmitTransition] = useTransition();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -61,38 +62,57 @@ export default function CreateCampaignPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const storedCampaigns = JSON.parse(localStorage.getItem('userCampaigns') || '[]');
-      const newCampaign: Campaign = {
-        id: `user-${Date.now()}`,
-        title: values.title,
-        description: values.description,
-        fullDescription: values.description, // Use short description for full for now
-        imageUrl: values.imageUrl,
-        targetAmount: values.targetAmount,
-        raisedAmount: 0,
-        fundraiserName: 'You', // Placeholder name
-        cause: values.cause,
-        aiHint: 'custom campaign',
-      };
-      
-      const updatedCampaigns = [...storedCampaigns, newCampaign];
-      localStorage.setItem('userCampaigns', JSON.stringify(updatedCampaigns));
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    startSubmitTransition(async () => {
+      try {
+        // 1. Generate the long description
+        const longDescResponse = await fetch('/api/generate-description', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: values.title, shortDescription: values.description }),
+        });
+        const longDescResult = await longDescResponse.json();
 
-      toast({
-        title: 'Campaign Created!',
-        description: 'Your campaign has been successfully created and saved.',
-      });
-      router.push('/causes');
-    } catch (error) {
-       console.error("Failed to save campaign to localStorage", error);
-       toast({
-        title: 'Save Failed',
-        description: 'Could not save your campaign to the browser storage.',
-        variant: 'destructive',
-      });
-    }
+        if (!longDescResponse.ok || !longDescResult.success) {
+            throw new Error(longDescResult.error || 'Failed to generate full description.');
+        }
+        
+        const fullDescription = longDescResult.description;
+
+        // 2. Save the new campaign with both descriptions
+        const storedCampaigns = JSON.parse(localStorage.getItem('userCampaigns') || '[]');
+        const newCampaign: Campaign = {
+          id: `user-${Date.now()}`,
+          title: values.title,
+          description: values.description,
+          fullDescription: fullDescription,
+          imageUrl: values.imageUrl,
+          targetAmount: values.targetAmount,
+          raisedAmount: 0,
+          fundraiserName: 'You',
+          cause: values.cause,
+          aiHint: 'custom campaign',
+        };
+        
+        const updatedCampaigns = [...storedCampaigns, newCampaign];
+        localStorage.setItem('userCampaigns', JSON.stringify(updatedCampaigns));
+
+        toast({
+          title: 'Campaign Created!',
+          description: 'Your campaign has been successfully created and saved.',
+        });
+        router.push('/causes');
+
+      } catch (error) {
+         console.error("Failed to create campaign", error);
+         const errorMessage = error instanceof Error ? error.message : 'Could not save your campaign.';
+         toast({
+          title: 'Creation Failed',
+          description: errorMessage,
+          variant: 'destructive',
+        });
+      }
+    });
   }
   
   const handleGenerateDescription = () => {
@@ -107,7 +127,7 @@ export default function CreateCampaignPage() {
       return;
     }
 
-    startTransition(async () => {
+    startAiTransition(async () => {
       try {
         const response = await fetch('/api/generate-description', {
           method: 'POST',
@@ -142,6 +162,8 @@ export default function CreateCampaignPage() {
       }
     });
   };
+  
+  const isPending = isAiPending || isSubmitPending;
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-16 max-w-3xl">
@@ -230,9 +252,9 @@ export default function CreateCampaignPage() {
                   <FormItem>
                     <div className="flex justify-between items-center">
                       <FormLabel>Campaign Description</FormLabel>
-                      <Button type="button" variant="ghost" size="sm" onClick={handleGenerateDescription} disabled={isPending}>
+                      <Button type="button" variant="ghost" size="sm" onClick={handleGenerateDescription} disabled={isAiPending}>
                         <Wand2 className="mr-2 h-4 w-4" />
-                        {isPending ? 'Generating...' : 'Generate with AI'}
+                        {isAiPending ? 'Generating...' : 'Generate with AI'}
                       </Button>
                     </div>
                     <FormControl>
@@ -247,7 +269,9 @@ export default function CreateCampaignPage() {
                 )}
               />
 
-              <Button type="submit" size="lg" className="w-full font-bold">Create Campaign</Button>
+              <Button type="submit" size="lg" className="w-full font-bold" disabled={isPending}>
+                {isSubmitPending ? 'Creating Campaign...' : 'Create Campaign'}
+              </Button>
             </form>
           </Form>
         </CardContent>
