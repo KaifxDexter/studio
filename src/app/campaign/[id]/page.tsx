@@ -1,23 +1,68 @@
 
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { campaigns } from '@/lib/data';
+import { useCampaigns } from '@/hooks/use-campaigns';
+import type { Campaign } from '@/lib/types';
 import { Progress } from '@/components/ui/progress';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { User, Target, TrendingUp } from 'lucide-react';
+import { User } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export async function generateStaticParams() {
-  return campaigns.map((campaign) => ({
-    id: campaign.id,
-  }));
-}
+export const dynamicParams = true;
 
-export default function CampaignDetailsPage({ params }: { params: { id: string } }) {
-  const campaign = campaigns.find(c => c.id === params.id);
+function CampaignDetailsClient({ id }: { id: string }) {
+  const allCampaigns = useCampaigns();
+  const [campaign, setCampaign] = useState<Campaign | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const foundCampaign = allCampaigns.find(c => c.id === id);
+    setCampaign(foundCampaign || null);
+    setIsLoading(false);
+  }, [id, allCampaigns]);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8 md:py-16">
+        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="lg:col-span-2">
+            <Skeleton className="h-10 w-1/4 mb-2" />
+            <Skeleton className="h-12 w-3/4 mb-4" />
+            <Skeleton className="h-6 w-1/2 mb-8" />
+            <Skeleton className="aspect-video w-full" />
+            <div className="mt-8 space-y-4">
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-6 w-5/6" />
+            </div>
+          </div>
+          <div className="lg:col-span-1">
+            <Card className="sticky top-24 shadow-lg glass-card">
+              <CardHeader>
+                <Skeleton className="h-3 w-full mb-2" />
+                <div className="flex justify-between items-baseline">
+                  <Skeleton className="h-8 w-1/3" />
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
+              </CardHeader>
+              <CardContent className="text-center">
+                 <Skeleton className="h-8 w-3/4 mx-auto mb-4" />
+                 <Skeleton className="h-64 w-64 mx-auto" />
+                 <Skeleton className="h-4 w-5/6 mx-auto mt-4" />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!campaign) {
-    notFound();
+    return notFound();
   }
 
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
@@ -80,7 +125,7 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
                   width={256}
                   height={256}
                   className="rounded-md"
-                  unoptimized // QR code from external API
+                  unoptimized
                 />
               </div>
               <p className="text-sm text-muted-foreground mt-4">
@@ -92,4 +137,9 @@ export default function CampaignDetailsPage({ params }: { params: { id: string }
       </div>
     </div>
   );
+}
+
+
+export default function CampaignDetailsPage({ params }: { params: { id: string } }) {
+  return <CampaignDetailsClient id={params.id} />;
 }
