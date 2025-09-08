@@ -18,14 +18,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
-// This function is required for static export with dynamic routes.
-// It tells Next.js which pages to pre-render at build time.
-export async function generateStaticParams() {
-  return staticCampaigns.map((campaign) => ({
-    id: campaign.id,
-  }));
-}
-
 function CampaignDetailsClient({ id }: { id: string }) {
   const allCampaigns = useCampaigns();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
@@ -227,6 +219,19 @@ function CampaignDetailsClient({ id }: { id: string }) {
 }
 
 
+// This is the Server Component Page
+// It is responsible for fetching static params at build time
+import { campaigns as staticCampaigns } from '@/lib/data';
+
+// This function is required for static export with dynamic routes.
+// It tells Next.js which pages to pre-render at build time.
+export async function generateStaticParams() {
+  return staticCampaigns.map((campaign) => ({
+    id: campaign.id,
+  }));
+}
+
 export default function CampaignDetailsPage({ params }: { params: { id: string } }) {
+  // We pass the `id` to the Client Component, which handles all fetching and rendering
   return <CampaignDetailsClient id={params.id} />;
 }
