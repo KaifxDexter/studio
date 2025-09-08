@@ -7,6 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { User, Target, TrendingUp } from 'lucide-react';
 
+export async function generateStaticParams() {
+  return campaigns.map((campaign) => ({
+    id: campaign.id,
+  }));
+}
+
 export default function CampaignDetailsPage({ params }: { params: { id: string } }) {
   const campaign = campaigns.find(c => c.id === params.id);
 
