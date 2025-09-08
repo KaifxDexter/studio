@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -126,7 +127,6 @@ export function CampaignDetailsClient({ id }: { id:string }) {
                 className="w-full h-full object-cover"
                 data-ai-hint={campaign.aiHint}
                 priority
-                unoptimized
               />
             </div>
           </Card>
@@ -159,7 +159,6 @@ export function CampaignDetailsClient({ id }: { id:string }) {
                     width={256}
                     height={256}
                     className="rounded-md"
-                    unoptimized
                   />
                 </div>
                 <p className="text-sm text-muted-foreground mt-2">

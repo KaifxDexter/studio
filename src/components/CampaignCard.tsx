@@ -90,7 +90,6 @@ export function CampaignCard({ campaign, animationDirection, index = 0 }: Campai
                 height={400}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 data-ai-hint={campaign.aiHint}
-                unoptimized
               />
             </div>
             <Badge variant="secondary" className="absolute top-2 right-2 bg-black/50 text-white">{campaign.cause}</Badge>
