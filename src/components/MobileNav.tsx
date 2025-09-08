@@ -8,11 +8,13 @@ import { navLinks } from '@/lib/data';
 
 export function MobileNav() {
   const pathname = usePathname();
+  // Filter out the profile link for the mobile nav to save space
+  const mobileNavLinks = navLinks.filter(link => link.href !== '/profile' && link.href !== '/contact');
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-black/10 backdrop-blur-[24px] border-t border-white/20 z-50">
       <nav className="flex h-full items-center justify-around">
-        {navLinks.map((link) => (
+        {mobileNavLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}

@@ -102,7 +102,7 @@ export function CampaignDeck({ campaigns }: { campaigns: Campaign[] }) {
                 // @ts-ignore
                 custom={displayIndex}
               >
-                  <CampaignCard campaign={campaign} animationDirection="left" />
+                  <CampaignCard campaign={campaign} animationDirection="left" index={displayIndex} />
                 </motion.div>
             ))}
         </AnimatePresence>

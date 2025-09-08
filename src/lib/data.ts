@@ -1,10 +1,11 @@
 
 import type { Campaign, NavLink } from './types';
-import { Home, PlusCircle, Mail, User } from 'lucide-react';
+import { Home, PlusCircle, Mail, User, HeartHandshake } from 'lucide-react';
 
 
 export const navLinks: NavLink[] = [
   { href: '/', label: 'Home', icon: Home },
+  { href: '/causes', label: 'Causes', icon: HeartHandshake },
   { href: '/create', label: 'Create', icon: PlusCircle },
   { href: '/contact', label: 'Contact', icon: Mail },
   { href: '/profile', label: 'Profile', icon: User },
@@ -264,5 +265,3 @@ export const campaigns: Campaign[] = [
     aiHint: 'silk weaving',
   },
 ];
-
-    

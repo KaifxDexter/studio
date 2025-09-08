@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { CampaignDeck } from '@/components/CampaignDeck';
 import { campaigns } from '@/lib/data';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Grid3x3 } from 'lucide-react';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -43,7 +43,7 @@ export default function Home() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link href="#campaigns">Browse Causes</Link>
+              <Link href="/causes">Browse Causes</Link>
             </Button>
           </div>
         </div>
@@ -58,10 +58,20 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12 text-white">
-            Active Campaigns
-          </h2>
-          <CampaignDeck campaigns={campaigns} />
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-headline font-bold text-white">
+              Active Campaigns
+            </h2>
+            <p className="text-muted-foreground mt-2">Swipe through featured causes or view all campaigns.</p>
+          </div>
+          <CampaignDeck campaigns={campaigns.slice(0, 10)} />
+          <div className="text-center mt-12">
+             <Button asChild size="lg">
+                <Link href="/causes">
+                  View All Causes <Grid3x3 className="ml-2" />
+                </Link>
+             </Button>
+          </div>
         </div>
       </motion.section>
     </div>

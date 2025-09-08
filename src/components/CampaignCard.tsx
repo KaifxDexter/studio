@@ -18,7 +18,8 @@ import { motion } from 'framer-motion';
 
 interface CampaignCardProps {
   campaign: Campaign;
-  animationDirection: 'left' | 'right';
+  animationDirection: 'left' | 'right' | 'none';
+  index?: number;
 }
 
 const cardVariants = {
@@ -27,6 +28,19 @@ const cardVariants = {
     x: direction === 'left' ? -200 : 200,
     rotate: direction === 'left' ? -8 : 8,
   }),
+  gridVisible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  }),
+  gridHidden: {
+    opacity: 0,
+    y: 50,
+  },
   visible: {
     opacity: 1,
     x: 0,
@@ -41,16 +55,31 @@ const cardVariants = {
   },
 };
 
-export function CampaignCard({ campaign, animationDirection }: CampaignCardProps) {
+export function CampaignCard({ campaign, animationDirection, index = 0 }: CampaignCardProps) {
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
+
+  const getAnimationProps = () => {
+    if (animationDirection === 'none') {
+      return {
+        variants: cardVariants,
+        initial: "gridHidden",
+        whileInView: "gridVisible",
+        viewport: { once: true },
+        custom: index,
+      };
+    }
+    return {
+      variants: cardVariants,
+      custom: animationDirection,
+    };
+  };
 
   return (
     <motion.div
-      variants={cardVariants}
-      custom={animationDirection}
+      {...getAnimationProps()}
       className="h-full"
     >
-      <Card className="flex flex-col h-full w-full transition-all duration-300 glass-card overflow-hidden">
+      <Card className="flex flex-col h-full w-full transition-all duration-300 glass-card overflow-hidden group">
         <CardHeader className="p-0">
           <Link href={`/campaign/${campaign.id}`} className="block relative">
             <div className="aspect-video overflow-hidden">
