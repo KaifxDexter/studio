@@ -12,7 +12,8 @@ import { Badge } from '@/components/ui/badge';
 import { User } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export const dynamicParams = true;
+// This page is now fully dynamic to support campaigns created on the client.
+export const dynamic = 'force-dynamic';
 
 function CampaignDetailsClient({ id }: { id: string }) {
   const allCampaigns = useCampaigns();
@@ -20,9 +21,11 @@ function CampaignDetailsClient({ id }: { id: string }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const foundCampaign = allCampaigns.find(c => c.id === id);
-    setCampaign(foundCampaign || null);
-    setIsLoading(false);
+    if (allCampaigns.length > 0) {
+      const foundCampaign = allCampaigns.find(c => c.id === id);
+      setCampaign(foundCampaign || null);
+      setIsLoading(false);
+    }
   }, [id, allCampaigns]);
 
   if (isLoading) {
