@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { CampaignDeck } from '@/components/CampaignDeck';
-import { campaigns } from '@/lib/data';
+import { useCampaigns } from '@/hooks/use-campaigns';
 import { ArrowRight, Grid3x3 } from 'lucide-react';
 
 const sectionVariants = {
@@ -21,6 +21,8 @@ const sectionVariants = {
 };
 
 export default function Home() {
+  const campaigns = useCampaigns();
+  
   return (
     <div className="flex flex-col items-center">
       <motion.section 

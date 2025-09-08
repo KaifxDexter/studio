@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { User, Edit } from 'lucide-react';
-import { campaigns } from '@/lib/data';
+import { useCampaigns } from '@/hooks/use-campaigns';
 import { CampaignCard } from '@/components/CampaignCard';
 import {
   Dialog,
@@ -52,6 +52,7 @@ const defaultProfile = {
 
 export default function ProfilePage() {
   const { toast } = useToast();
+  const allCampaigns = useCampaigns();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [userProfile, setUserProfile] = useState(defaultProfile);
 
@@ -65,9 +66,9 @@ export default function ProfilePage() {
       console.error("Could not load user profile from localStorage", error);
     }
   }, []);
-
-  const userCampaigns = campaigns.slice(0, 2);
-  const userDonations = campaigns.slice(2, 4);
+  
+  const userCampaigns = allCampaigns.filter(c => c.fundraiserName === 'You');
+  const userDonations = allCampaigns.slice(2, 4);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -197,7 +198,7 @@ export default function ProfilePage() {
               {userCampaigns.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {userCampaigns.map(campaign => (
-                    <CampaignCard key={campaign.id} campaign={campaign} />
+                    <CampaignCard key={campaign.id} campaign={campaign} animationDirection="none" />
                   ))}
                 </div>
               ) : (

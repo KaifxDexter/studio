@@ -28,6 +28,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Wand2 } from 'lucide-react';
+import type { Campaign } from '@/lib/types';
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -61,12 +62,37 @@ export default function CreateCampaignPage() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: 'Campaign Created (Simulated)!',
-      description: 'Your campaign has been successfully created.',
-    });
-    router.push('/');
+    try {
+      const storedCampaigns = JSON.parse(localStorage.getItem('userCampaigns') || '[]');
+      const newCampaign: Campaign = {
+        id: `user-${Date.now()}`,
+        title: values.title,
+        description: values.description,
+        fullDescription: values.description, // Use short description for full for now
+        imageUrl: values.imageUrl,
+        targetAmount: values.targetAmount,
+        raisedAmount: 0,
+        fundraiserName: 'You', // Placeholder name
+        cause: values.cause,
+        aiHint: 'custom campaign',
+      };
+      
+      const updatedCampaigns = [...storedCampaigns, newCampaign];
+      localStorage.setItem('userCampaigns', JSON.stringify(updatedCampaigns));
+
+      toast({
+        title: 'Campaign Created!',
+        description: 'Your campaign has been successfully created and saved.',
+      });
+      router.push('/causes');
+    } catch (error) {
+       console.error("Failed to save campaign to localStorage", error);
+       toast({
+        title: 'Save Failed',
+        description: 'Could not save your campaign to the browser storage.',
+        variant: 'destructive',
+      });
+    }
   }
   
   const handleGenerateDescription = () => {
