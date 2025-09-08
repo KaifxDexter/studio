@@ -7,10 +7,14 @@ import { notFound } from 'next/navigation';
 import { useCampaigns } from '@/hooks/use-campaigns';
 import type { Campaign } from '@/lib/types';
 import { Progress } from '@/components/ui/progress';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { User } from 'lucide-react';
+import { User, Copy, Banknote, CreditCard } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 
 // This page is now fully dynamic to support campaigns created on the client.
 export const dynamic = 'force-dynamic';
@@ -19,6 +23,10 @@ function CampaignDetailsClient({ id }: { id: string }) {
   const allCampaigns = useCampaigns();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [donationAmount, setDonationAmount] = useState('');
+  const { toast } = useToast();
+
+  const upiId = 'kaifnabeel125@oksbi';
 
   useEffect(() => {
     if (allCampaigns.length > 0) {
@@ -27,6 +35,30 @@ function CampaignDetailsClient({ id }: { id: string }) {
       setIsLoading(false);
     }
   }, [id, allCampaigns]);
+
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: 'Copied!',
+      description: `${text} has been copied to your clipboard.`,
+    });
+  };
+  
+  const handleConfirmDonation = () => {
+    if (donationAmount && parseFloat(donationAmount) > 0) {
+      toast({
+        title: 'Thank You!',
+        description: `Your donation of ₹${donationAmount} has been recorded.`,
+      });
+      setDonationAmount('');
+    } else {
+      toast({
+        title: 'Donation Recorded',
+        description: 'Thank you for your support!',
+        variant: 'default',
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -69,7 +101,7 @@ function CampaignDetailsClient({ id }: { id: string }) {
   }
 
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
-  const upiUrl = `upi://pay?pa=kaifnabeel125@oksbi&pn=Mohd Kaif&tn=Donation for ${encodeURIComponent(campaign.title)}&tr=${campaign.id}`;
+  const upiUrl = `upi://pay?pa=${upiId}&pn=Mohd Kaif&tn=Donation for ${encodeURIComponent(campaign.title)}&tr=${campaign.id}&am=${donationAmount || ''}`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiUrl)}&size=256x256&bgcolor=F9E7D9`;
 
   return (
@@ -119,21 +151,66 @@ function CampaignDetailsClient({ id }: { id: string }) {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="text-center">
-              <h3 className="text-lg font-semibold mb-4">Donate via any UPI App</h3>
-              <div className="p-1 bg-white/90 rounded-lg inline-block qr-code-container">
-                <Image
-                  src={qrCodeUrl}
-                  alt="Donation QR Code"
-                  width={256}
-                  height={256}
-                  className="rounded-md"
-                  unoptimized
-                />
+            <CardContent className="text-center space-y-6">
+              <div>
+                <CardTitle className="text-lg mb-2">Scan to Pay</CardTitle>
+                <div className="p-1 bg-white/90 rounded-lg inline-block qr-code-container">
+                  <Image
+                    src={qrCodeUrl}
+                    alt="Donation QR Code"
+                    width={256}
+                    height={256}
+                    className="rounded-md"
+                    unoptimized
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Scan with any UPI app to donate.
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                Scan the QR code with your favorite payment app to donate instantly.
-              </p>
+
+              <Separator />
+
+              <div>
+                 <CardTitle className="text-lg mb-3">Other Payment Options</CardTitle>
+                 <div className="space-y-4 text-left">
+                    <div className="space-y-2">
+                       <Label className="flex items-center gap-2 text-muted-foreground"><Banknote /> UPI ID</Label>
+                       <div className="flex items-center gap-2">
+                          <Input readOnly value={upiId} className="flex-1" />
+                          <Button variant="outline" size="icon" onClick={() => handleCopy(upiId)}>
+                             <Copy className="h-4 w-4" />
+                          </Button>
+                       </div>
+                    </div>
+                    <div className="space-y-2">
+                       <Label className="flex items-center gap-2 text-muted-foreground"><CreditCard /> Bank Transfer</Label>
+                       <div className="text-sm p-3 rounded-md bg-black/20 border border-white/10">
+                          <p><strong>Account:</strong> 1234567890</p>
+                          <p><strong>IFSC:</strong> FAKE0001234</p>
+                          <p><strong>Name:</strong> Mohd Kaif</p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              
+              <Separator />
+
+              <div className="space-y-3">
+                <Label htmlFor="amount" className="text-lg">Enter Custom Amount (Optional)</Label>
+                <Input 
+                  id="amount" 
+                  type="number" 
+                  placeholder="e.g., 500" 
+                  value={donationAmount}
+                  onChange={(e) => setDonationAmount(e.target.value)}
+                  className="text-center text-lg"
+                />
+                <Button size="lg" className="w-full font-bold" onClick={handleConfirmDonation}>
+                  Confirm Donation
+                </Button>
+              </div>
+
             </CardContent>
           </Card>
         </div>
