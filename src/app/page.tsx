@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -66,7 +65,7 @@ export default function Home() {
             </h2>
             <p className="text-muted-foreground mt-2">Swipe through featured causes or view all campaigns.</p>
           </div>
-          <CampaignDeck campaigns={campaigns.slice(0, 10)} />
+          <CampaignDeck campaigns={campaigns} />
           <div className="text-center mt-12">
              <Button asChild size="lg">
                 <Link href="/causes">
