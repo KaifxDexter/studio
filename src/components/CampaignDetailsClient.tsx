@@ -3,19 +3,29 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import { useCampaigns } from '@/hooks/use-campaigns';
 import type { Campaign } from '@/lib/types';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { User, Copy, Banknote, CreditCard } from 'lucide-react';
+import { User, Copy, Banknote, CreditCard, Trash2 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 export function CampaignDetailsClient({ id }: { id:string }) {
   const allCampaigns = useCampaigns();
@@ -23,6 +33,7 @@ export function CampaignDetailsClient({ id }: { id:string }) {
   const [isLoading, setIsLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState('');
   const { toast } = useToast();
+  const router = useRouter();
 
   const upiId = 'kaifnabeel125@oksbi';
 
@@ -55,6 +66,30 @@ export function CampaignDetailsClient({ id }: { id:string }) {
         title: 'Donation Recorded',
         description: 'Thank you for your support!',
         variant: 'default',
+      });
+    }
+  };
+
+  const handleDeleteCampaign = () => {
+    if (!campaign) return;
+
+    try {
+      const storedCampaigns = JSON.parse(localStorage.getItem('userCampaigns') || '[]');
+      const updatedCampaigns = storedCampaigns.filter((c: Campaign) => c.id !== campaign.id);
+      localStorage.setItem('userCampaigns', JSON.stringify(updatedCampaigns));
+      
+      toast({
+        title: 'Campaign Deleted',
+        description: 'Your campaign has been successfully deleted.',
+      });
+
+      router.push('/causes');
+    } catch (error) {
+      console.error("Failed to delete campaign", error);
+      toast({
+        title: 'Deletion Failed',
+        description: 'Could not delete your campaign. Please try again.',
+        variant: 'destructive',
       });
     }
   };
@@ -96,9 +131,11 @@ export function CampaignDetailsClient({ id }: { id:string }) {
   }
 
   if (!campaign) {
+    // This will trigger the not-found.tsx page if a campaign isn't found
     return notFound();
   }
 
+  const isUserCampaign = campaign.id.startsWith('user-');
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
   const upiUrl = `upi://pay?pa=${upiId}&pn=Mohd Kaif&tn=Donation for ${encodeURIComponent(campaign.title)}&tr=${campaign.id}&am=${donationAmount || ''}`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiUrl)}&size=256x256&bgcolor=F9E7D9`;
@@ -108,10 +145,38 @@ export function CampaignDetailsClient({ id }: { id:string }) {
       <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
         <div className="lg:col-span-2">
           <div className="mb-6">
-            <Badge variant="secondary" className="mb-2 bg-black/50 text-white">{campaign.cause}</Badge>
-            <h1 className="text-3xl md:text-5xl font-headline font-bold text-white">
-              {campaign.title}
-            </h1>
+            <div className="flex justify-between items-start">
+              <div>
+                <Badge variant="secondary" className="mb-2 bg-black/50 text-white">{campaign.cause}</Badge>
+                <h1 className="text-3xl md:text-5xl font-headline font-bold text-white">
+                  {campaign.title}
+                </h1>
+              </div>
+              {isUserCampaign && (
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive" size="icon" className="ml-4 flex-shrink-0">
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="glass-card">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently delete your
+                        campaign and remove its data.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleDeleteCampaign}>
+                        Delete
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              )}
+            </div>
             <div className="flex items-center mt-4 text-muted-foreground">
               <User className="mr-2 h-4 w-4" />
               <span>Organized by {campaign.fundraiserName}</span>
