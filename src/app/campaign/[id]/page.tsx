@@ -1,5 +1,5 @@
-
-'use client';
+// NOTE: The 'use client' directive has been moved to the Client Component below.
+// This file is now primarily a Server Component to handle static generation.
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -16,8 +16,11 @@ import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { campaigns as staticCampaigns } from '@/lib/data';
 
-// All logic is now inside this client component.
+// This is now a dedicated Client Component. All logic is here.
+// 'use client' is placed here to correctly mark it.
+'use client';
 function CampaignDetailsClient({ id }: { id:string }) {
   const allCampaigns = useCampaigns();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
@@ -219,13 +222,8 @@ function CampaignDetailsClient({ id }: { id:string }) {
   );
 }
 
-// NOTE: The page is now split. This bottom part is the Server Component.
-// It is only responsible for exporting generateStaticParams and rendering the Client Component.
-// There is no 'use client' at the top of the file anymore.
-
-import { campaigns as staticCampaigns } from '@/lib/data';
-
 // This function is required for static export with dynamic routes.
+// It runs at build time on the server.
 export async function generateStaticParams() {
   return staticCampaigns.map((campaign) => ({
     id: campaign.id,
