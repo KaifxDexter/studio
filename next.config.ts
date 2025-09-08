@@ -2,10 +2,6 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  // Allow client-side rendering for dynamic routes that were not pre-built.
-  // This is essential for handling user-created campaigns that are not known at build time.
-  dynamicParams: true, 
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,
@@ -14,7 +10,6 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -41,7 +36,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
+        protocol: 'https,"
         hostname: 'sdmntprwestus.oaiusercontent.com',
         port: '',
         pathname: '/**',

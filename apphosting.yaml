@@ -5,3 +5,11 @@ runConfig:
   # Increase this value if you'd like to automatically spin up
   # more instances in response to increased traffic.
   maxInstances: 1
+server:
+  # App Hosting's build process will use this command to build your app.
+  # This command is found in your package.json scripts.
+  build: build
+
+  # App Hosting will use this command to start your app.
+  # This command is found in your package.json scripts.
+  start: start
