@@ -15,11 +15,14 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
+import { Edit, Trash2 } from 'lucide-react';
 
 interface CampaignCardProps {
   campaign: Campaign;
-  animationDirection: 'left' | 'right' | 'none';
+  animationDirection?: 'left' | 'right' | 'none';
   index?: number;
+  onEdit?: (campaign: Campaign) => void;
+  onDelete?: (campaignId: string) => void;
 }
 
 const cardVariants = {
@@ -55,7 +58,7 @@ const cardVariants = {
   },
 };
 
-export function CampaignCard({ campaign, animationDirection, index = 0 }: CampaignCardProps) {
+export function CampaignCard({ campaign, animationDirection = 'none', index = 0, onEdit, onDelete }: CampaignCardProps) {
   const progress = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
 
   const getAnimationProps = () => {
@@ -73,6 +76,17 @@ export function CampaignCard({ campaign, animationDirection, index = 0 }: Campai
       custom: animationDirection,
     };
   };
+  
+  const handleEdit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onEdit?.(campaign);
+  };
+  
+  const handleDelete = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onDelete?.(campaign.id);
+  };
+
 
   return (
     <motion.div
@@ -119,9 +133,20 @@ export function CampaignCard({ campaign, animationDirection, index = 0 }: Campai
           </CardContent>
         </div>
         <CardFooter className="p-4 pt-0">
-          <Button asChild className="w-full font-bold">
-            <Link href={`/campaign/${campaign.id}`}>Donate Now</Link>
-          </Button>
+          {onEdit && onDelete ? (
+             <div className="w-full flex gap-2">
+                <Button variant="outline" className="w-full" onClick={handleEdit}>
+                    <Edit className="mr-2" /> Edit
+                </Button>
+                <Button variant="destructive" className="w-full" onClick={handleDelete}>
+                    <Trash2 className="mr-2" /> Delete
+                </Button>
+             </div>
+          ) : (
+            <Button asChild className="w-full font-bold">
+              <Link href={`/campaign/${campaign.id}`}>Donate Now</Link>
+            </Button>
+          )}
         </CardFooter>
       </Card>
     </motion.div>
