@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { useCampaigns } from '@/hooks/use-campaigns';
 import type { Campaign } from '@/lib/types';
-import { campaigns as staticCampaigns } from '@/lib/data';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -18,7 +17,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
-function CampaignDetailsClient({ id }: { id: string }) {
+// All logic is now inside this client component.
+function CampaignDetailsClient({ id }: { id:string }) {
   const allCampaigns = useCampaigns();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +28,7 @@ function CampaignDetailsClient({ id }: { id: string }) {
   const upiId = 'kaifnabeel125@oksbi';
 
   useEffect(() => {
+    // We check all campaigns (static + localStorage) to find the right one.
     if (allCampaigns.length > 0) {
       const foundCampaign = allCampaigns.find(c => c.id === id);
       setCampaign(foundCampaign || null);
@@ -218,20 +219,21 @@ function CampaignDetailsClient({ id }: { id: string }) {
   );
 }
 
+// NOTE: The page is now split. This bottom part is the Server Component.
+// It is only responsible for exporting generateStaticParams and rendering the Client Component.
+// There is no 'use client' at the top of the file anymore.
 
-// This is the Server Component Page
-// It is responsible for fetching static params at build time
 import { campaigns as staticCampaigns } from '@/lib/data';
 
 // This function is required for static export with dynamic routes.
-// It tells Next.js which pages to pre-render at build time.
 export async function generateStaticParams() {
   return staticCampaigns.map((campaign) => ({
     id: campaign.id,
   }));
 }
 
+// This is the main page component (a Server Component).
 export default function CampaignDetailsPage({ params }: { params: { id: string } }) {
-  // We pass the `id` to the Client Component, which handles all fetching and rendering
+  // It renders the Client Component, which handles all the logic and UI.
   return <CampaignDetailsClient id={params.id} />;
 }
