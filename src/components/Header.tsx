@@ -12,18 +12,19 @@ import { navLinks } from '@/lib/data';
 
 export function Header() {
   const pathname = usePathname();
-  const isAuthenticated = false; // Placeholder for auth logic
+  const isAuthenticated = true; // Set to true to always show profile icon as per new design
 
   return (
     <header className="sticky top-0 z-50 w-full py-4">
       <div className="container flex h-16 items-center justify-center">
-        <div className="flex items-center w-full max-w-4xl px-6 py-2 rounded-full border border-white/20 bg-black/30 backdrop-blur-lg shadow-lg">
-          <div className="flex-1 md:flex-none">
-              <Link href="/" className="mr-6 flex items-center space-x-2">
-                  <Logo />
-              </Link>
-          </div>
-          <nav className="hidden md:flex flex-1 items-center justify-center space-x-8 text-sm font-medium">
+        <div className="flex items-center w-full max-w-6xl px-6 py-2 rounded-full border border-white/20 bg-black/30 backdrop-blur-lg shadow-lg">
+          <Link href="/" className="mr-6 flex items-center space-x-2">
+              <Logo />
+          </Link>
+          
+          <div className="flex-grow" />
+
+          <nav className="hidden md:flex items-center justify-end space-x-8 text-sm font-medium">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -43,16 +44,6 @@ export function Header() {
                 </Link>
               ))}
           </nav>
-          
-          <div className="flex items-center justify-end space-x-2">
-            {isAuthenticated && (
-              <Button asChild variant="ghost" size="icon">
-                <Link href="/profile">
-                  <User className="h-5 w-5" />
-                </Link>
-              </Button>
-            )}
-          </div>
         </div>
       </div>
     </header>
