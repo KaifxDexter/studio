@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -64,7 +65,7 @@ export function Header() {
                   {link.label}
                    {pathname === link.href && (
                     <motion.div
-                      className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-red-500"
+                      className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-primary-foreground"
                       layoutId="underline"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
