@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -36,53 +35,64 @@ export function Header() {
 
   return (
     <motion.header
-      className="sticky top-0 z-50 w-full border-b border-white/20 bg-black/10 backdrop-blur-[24px] transition-transform duration-300 ease-in-out"
+      className="sticky top-0 z-50 w-full transition-transform duration-300 ease-in-out py-4"
       variants={{
         visible: { y: 0 },
-        hidden: { y: "-100%" },
+        hidden: { y: "-120%" },
       }}
       initial="visible"
       animate={controls}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
-      <div className="container flex h-16 items-center">
-        <div className="flex-1 md:flex-none">
-            <Link href="/" className="mr-6 flex items-center space-x-2">
-                <Logo />
-            </Link>
-        </div>
-        <nav className="hidden md:flex flex-1 items-center space-x-6 text-sm font-medium">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'transition-colors hover:text-primary',
-                  pathname === link.href ? 'text-primary' : 'text-muted-foreground'
-                )}
-              >
-                {link.label}
+      <div className="container flex h-16 items-center justify-center">
+        <div className="flex items-center w-full max-w-4xl px-6 py-2 rounded-full border border-white/20 bg-black/30 backdrop-blur-lg shadow-lg">
+          <div className="flex-1 md:flex-none">
+              <Link href="/" className="mr-6 flex items-center space-x-2">
+                  <Logo />
               </Link>
-            ))}
-        </nav>
-        
-        <div className="flex items-center justify-end space-x-2">
-          {isAuthenticated ? (
-            <Button asChild variant="ghost" size="icon">
-              <Link href="/profile">
-                <User className="h-5 w-5" />
-              </Link>
-            </Button>
-          ) : (
-            <div className="hidden sm:flex items-center gap-2">
-              <Button asChild variant="ghost">
-                <Link href="/login">Log In</Link>
+          </div>
+          <nav className="hidden md:flex flex-1 items-center justify-center space-x-8 text-sm font-medium">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    'relative transition-colors hover:text-primary',
+                    pathname === link.href ? 'text-primary font-semibold' : 'text-muted-foreground'
+                  )}
+                >
+                  {link.label}
+                   {pathname === link.href && (
+                    <motion.div
+                      className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-red-500"
+                      layoutId="underline"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </Link>
+              ))}
+          </nav>
+          
+          <div className="flex items-center justify-end space-x-2">
+            {isAuthenticated ? (
+              <Button asChild variant="ghost" size="icon">
+                <Link href="/profile">
+                  <User className="h-5 w-5" />
+                </Link>
               </Button>
-              <Button asChild>
-                <Link href="/signup">Sign Up</Link>
-              </Button>
-            </div>
-          )}
+            ) : (
+              <div className="hidden sm:flex items-center gap-2">
+                <Button asChild variant="ghost">
+                  <Link href="/login">Log In</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/signup">Sign Up</Link>
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </motion.header>
