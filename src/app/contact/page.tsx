@@ -1,4 +1,3 @@
-
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,39 +17,38 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
 import { Send } from 'lucide-react';
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Name must be at least 2 characters.',
-  }),
-  email: z.string().email({
-    message: 'Please enter a valid email address.',
-  }),
-  message: z.string().min(10, {
-    message: 'Message must be at least 10 characters.',
-  }),
+  name: z.string().min(2, 'Name must be at least 2 characters.'),
+  email: z.string().email('Please enter a valid email address.'),
+  subject: z.string().min(3, 'Subject must be at least 3 characters.'),
+  message: z.string().min(10, 'Message must be at least 10 characters.'),
 });
 
 export default function ContactPage() {
-  const { toast } = useToast();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
       email: '',
+      subject: '',
       message: '',
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: 'Message Sent!',
-      description: "Thanks for reaching out. We'll get back to you soon.",
-    });
+    const phoneNumber = '919096593947';
+    const text = `New contact form submission
+Name: ${values.name}
+Email: ${values.email}
+Subject: ${values.subject}
+Message: ${values.message}`;
+    
+    const encodedText = encodeURIComponent(text);
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedText}`;
+
+    window.open(whatsappUrl, '_blank');
     form.reset();
   }
 
@@ -94,6 +93,20 @@ export default function ContactPage() {
 
               <FormField
                 control={form.control}
+                name="subject"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Subject</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., Campaign Question" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name="message"
                 render={({ field }) => (
                   <FormItem>
@@ -115,6 +128,9 @@ export default function ContactPage() {
               </Button>
             </form>
           </Form>
+           <p className="text-xs text-muted-foreground mt-4 text-center">
+            Note: On desktop, this will open WhatsApp Web in a new tab.
+          </p>
         </CardContent>
       </Card>
     </div>
