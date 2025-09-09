@@ -124,7 +124,7 @@ Message: ${values.message}`;
               />
 
               <Button type="submit" size="lg" className="w-full font-bold">
-                Send Message <Send className="ml-2" />
+                Send Message on Whatsapp <Send className="ml-2" />
               </Button>
             </form>
           </Form>
