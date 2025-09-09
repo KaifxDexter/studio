@@ -21,6 +21,8 @@ const sectionVariants = {
   },
 };
 
+const headlineText = 'Empower Change, One Scan at a Time'.split(' ');
+
 export default function Home() {
   const { campaigns, isLoading } = useCampaigns();
   
@@ -33,8 +35,20 @@ export default function Home() {
         animate="visible"
       >
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-white">
-            Empower Change, One Scan at a Time
+          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-white flex flex-wrap justify-center items-center">
+            {headlineText.map((word, wordIndex) => (
+              <span key={wordIndex} className="mr-3 md:mr-5 whitespace-nowrap">
+                {word.split('').map((char, charIndex) => (
+                  <motion.span
+                    key={charIndex}
+                    className="inline-block"
+                    whileHover={{ y: -10, transition: { duration: 0.2, ease: 'easeOut' } }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            ))}
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground">
             Donify makes it simple to support causes you care about. Create a campaign or donate instantly with a QR code.
