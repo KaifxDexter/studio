@@ -45,21 +45,12 @@ export function Header() {
           </nav>
           
           <div className="flex items-center justify-end space-x-2">
-            {isAuthenticated ? (
+            {isAuthenticated && (
               <Button asChild variant="ghost" size="icon">
                 <Link href="/profile">
                   <User className="h-5 w-5" />
                 </Link>
               </Button>
-            ) : (
-              <div className="hidden sm:flex items-center gap-2">
-                <Button asChild variant="ghost">
-                  <Link href="/login">Log In</Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/signup">Sign Up</Link>
-                </Button>
-              </div>
             )}
           </div>
         </div>
