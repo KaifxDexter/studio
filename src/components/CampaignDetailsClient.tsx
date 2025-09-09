@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 export function CampaignDetailsClient({ id }: { id:string }) {
-  const allCampaigns = useCampaigns();
+  const { campaigns, isLoading: campaignsLoading } = useCampaigns();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [donationAmount, setDonationAmount] = useState('');
@@ -39,12 +39,12 @@ export function CampaignDetailsClient({ id }: { id:string }) {
 
   useEffect(() => {
     // We check all campaigns (static + localStorage) to find the right one.
-    if (allCampaigns.length > 0) {
-      const foundCampaign = allCampaigns.find(c => c.id === id);
+    if (!campaignsLoading) {
+      const foundCampaign = campaigns.find(c => c.id === id);
       setCampaign(foundCampaign || null);
       setIsLoading(false);
     }
-  }, [id, allCampaigns]);
+  }, [id, campaigns, campaignsLoading]);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);

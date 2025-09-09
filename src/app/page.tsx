@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { CampaignDeck } from '@/components/CampaignDeck';
 import { useCampaigns } from '@/hooks/use-campaigns';
 import { ArrowRight, Grid3x3 } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
+
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -20,7 +22,7 @@ const sectionVariants = {
 };
 
 export default function Home() {
-  const campaigns = useCampaigns();
+  const { campaigns, isLoading } = useCampaigns();
   
   return (
     <div className="flex flex-col items-center">
@@ -65,7 +67,13 @@ export default function Home() {
             </h2>
             <p className="text-muted-foreground mt-2">Swipe through featured causes or view all campaigns.</p>
           </div>
-          <CampaignDeck campaigns={campaigns} />
+          {isLoading ? (
+             <div className="relative w-full max-w-lg mx-auto h-[520px] flex items-center justify-center">
+                <Skeleton className="w-full h-full rounded-lg" />
+             </div>
+          ) : (
+             <CampaignDeck campaigns={campaigns} />
+          )}
           <div className="text-center mt-12">
              <Button asChild size="lg">
                 <Link href="/causes">

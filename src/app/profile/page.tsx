@@ -53,6 +53,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const profileFormSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -80,7 +81,7 @@ const defaultProfile = {
 
 export default function ProfilePage() {
   const { toast } = useToast();
-  const allCampaigns = useCampaigns();
+  const { campaigns: allCampaigns, isLoading: campaignsLoading } = useCampaigns();
   const [userCampaigns, setUserCampaigns] = useState<Campaign[]>([]);
   const [userDonations] = useState(allCampaigns.slice(2, 4));
   
@@ -108,7 +109,6 @@ export default function ProfilePage() {
   const profileForm = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     values: userProfile,
-    enableReinitialize: true,
   });
 
   const campaignForm = useForm<CampaignFormValues>({
@@ -228,7 +228,19 @@ export default function ProfilePage() {
           <Card className="glass-card">
             <CardHeader><CardTitle>Campaigns You've Created</CardTitle></CardHeader>
             <CardContent>
-              {userCampaigns.length > 0 ? (
+              {campaignsLoading ? (
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {Array.from({ length: 2 }).map((_, index) => (
+                      <div key={index} className="space-y-4">
+                          <Skeleton className="aspect-video w-full" />
+                          <Skeleton className="h-6 w-3/4" />
+                          <Skeleton className="h-4 w-full" />
+                          <Skeleton className="h-4 w-1/2" />
+                          <Skeleton className="h-10 w-full mt-2" />
+                      </div>
+                    ))}
+                 </div>
+              ) : userCampaigns.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {userCampaigns.map(campaign => (
                     <CampaignCard key={campaign.id} campaign={campaign} onEdit={handleEditClick} onDelete={handleDeleteClick} />
@@ -244,7 +256,9 @@ export default function ProfilePage() {
           <Card className="glass-card">
             <CardHeader><CardTitle>Your Donation History</CardTitle></CardHeader>
             <CardContent className="space-y-4">
-              {userDonations.length > 0 ? userDonations.map(donation => (
+              {campaignsLoading ? (
+                 <p className="text-muted-foreground">Loading donation history...</p>
+              ) : userDonations.length > 0 ? userDonations.map(donation => (
                 <div key={donation.id} className="flex items-center justify-between p-4 border rounded-lg glass-card">
                   <div><p className="font-semibold">{donation.title}</p><p className="text-sm text-muted-foreground">Donated on {new Date().toLocaleDateString()}</p></div>
                   <p className="font-bold text-lg text-primary">₹500</p>
