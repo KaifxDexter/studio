@@ -77,7 +77,7 @@ export const campaigns: Campaign[] = [
     title: 'Clean Water Project for a Community in Need',
     description: 'Fund the installation of a new well and water purification system for a village without access to clean drinking water.',
     fullDescription: 'Access to clean water is a basic human right, yet many communities still struggle to find it. We have identified a village where residents, mostly children and women, walk several miles each day to collect water from a contaminated source, leading to widespread waterborne diseases. This project will fund the drilling of a new deep-water well and the installation of a solar-powered purification system. This will provide the entire community with a sustainable source of safe, clean drinking water, dramatically improving health and quality of life.',
-    imageUrl: 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-495c-61fa-a72d-59394c29f6ea/raw?se=2025-09-08T12%3A44%3A28Z&sp=r&sv=2024-08-04&sr=b&scid=a81b7230-e587-56c5-819f-a83dde530297&skoid=0b778285-7b0b-4cdc-ac3b-fb93e8c3686f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-08T01%3A51%3A41Z&ske=2025-09-09T01%3A51%3A41Z&sks=b&skv=2024-08-04&sig=T9sDLWagmdhKHRuC7Pbd4qJx1giS6fI6X5su7wDD96U%3D',
+    imageUrl: 'https://picsum.photos/600/400?random=6',
     targetAmount: 40000,
     raisedAmount: 15000,
     fundraiserName: 'Water for Life Initiative',
@@ -89,7 +89,7 @@ export const campaigns: Campaign[] = [
     title: 'Digital Classrooms for a Village School in Rajasthan',
     description: 'Help us equip a rural school in Rajasthan with smart boards and tablets to bridge the digital divide.',
     fullDescription: 'We believe that every child deserves a modern education. This project aims to bring digital learning to a government school in a remote village in Rajasthan, providing students with tools that will prepare them for the future. The funds will be used to purchase interactive smart boards, tablets for students, and provide training for teachers.',
-    imageUrl: 'https://sdmntprukwest.oaiusercontent.com/files/00000000-4624-6243-ba3b-61253c3e5f59/raw?se=2025-09-08T12%3A55%3A35Z&sp=r&sv=2024-08-04&sr=b&scid=b6359244-62a6-552b-a0b1-14b3495a15e4&skoid=0b778285-7b0b-4cdc-ac3b-fb93e8c3686f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-07T17%3A43%3A02Z&ske=2025-09-08T17%3A43%3A02Z&sks=b&skv=2024-08-04&sig=/jAgyzZyGTNJdnMWjfw9Y%2By3XeyAuTZga8J1nW5AqVU%3D',
+    imageUrl: 'https://picsum.photos/600/400?random=7',
     targetAmount: 35000,
     raisedAmount: 11200,
     fundraiserName: 'Rajasthan Education Trust',
@@ -265,3 +265,5 @@ export const campaigns: Campaign[] = [
     aiHint: 'silk weaving',
   },
 ];
+
+    
