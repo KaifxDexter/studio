@@ -17,7 +17,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full py-4">
       <div className="container flex h-16 items-center justify-center">
-        <div className="flex items-center w-full max-w-6xl px-6 py-2 rounded-full border border-white/20 bg-black/30 backdrop-blur-lg shadow-lg">
+        <div className="flex items-center w-full max-w-6xl px-6 py-2 rounded-full border border-white/20 bg-neutral-500/30 backdrop-blur-lg shadow-lg">
           <Link href="/" className="mr-6 flex items-center space-x-2">
               <Logo />
           </Link>
