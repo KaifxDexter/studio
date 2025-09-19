@@ -185,7 +185,7 @@ export const campaigns: Campaign[] = [
     title: 'Prosthetic Limbs for Landmine Victims',
     description: 'Provide high-quality prosthetic limbs to amputees in conflict-affected regions, giving them the gift of mobility.',
     fullDescription: 'In many parts of our country, unexploded landmines continue to injure innocent civilians long after conflicts have ended. This campaign provides custom-fitted, high-quality prosthetic limbs to those who have lost their arms or legs, helping them regain their independence, dignity, and ability to work.',
-    imageUrl: 'https://i.ibb.co/ZpBLZB4/unnamed.png',
+    imageUrl: 'https://i.ibb.co/LXDmPVfC/unnamed.png',
     targetAmount: 60000,
     raisedAmount: 28000,
     fundraiserName: 'Mobility India Foundation',
