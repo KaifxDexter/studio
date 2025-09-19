@@ -125,7 +125,7 @@ export const campaigns: Campaign[] = [
     title: 'Restore a Community Library in Kerala',
     description: 'Help us rebuild and restock a beloved community library in Kerala that was damaged in a fire.',
     fullDescription: 'The "People\'s Library" has been a hub of knowledge and community for decades. A recent fire has destroyed most of its collection and damaged the building. We are raising funds to repair the library, purchase new books, and create a safe and welcoming space for readers of all ages.',
-    imageUrl: 'https://i.ibb.co/rGbpKTT/image.png',
+    imageUrl: 'https://i.ibb.co/rGbpKTT3/image.png',
     targetAmount: 25000,
     raisedAmount: 9800,
     fundraiserName: 'Friends of the People\'s Library',
