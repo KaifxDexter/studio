@@ -1,12 +1,22 @@
+
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { CampaignDeck } from '@/components/CampaignDeck';
 import { useCampaigns } from '@/hooks/use-campaigns';
 import { ArrowRight, Grid3x3 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import type { Campaign, CampaignCause } from '@/lib/types';
 
 
 const sectionVariants = {
@@ -22,9 +32,16 @@ const sectionVariants = {
 };
 
 const headlineText = 'Empower Change, One Scan at a Time'.split(' ');
+const campaignCauses: Array<CampaignCause | 'All'> = ['All', 'Medical', 'Education', 'Disaster Relief', 'Personal'];
+
 
 export default function Home() {
   const { campaigns, isLoading } = useCampaigns();
+  const [selectedCategory, setSelectedCategory] = useState<CampaignCause | 'All'>('All');
+
+  const filteredCampaigns = selectedCategory === 'All'
+    ? campaigns
+    : campaigns.filter(campaign => campaign.cause === selectedCategory);
   
   return (
     <div className="flex flex-col items-center">
@@ -81,12 +98,26 @@ export default function Home() {
             </h2>
             <p className="text-muted-foreground mt-2">Swipe through featured causes or view all campaigns.</p>
           </div>
+          
+           <div className="flex justify-center mb-8">
+              <Select onValueChange={(value) => setSelectedCategory(value as CampaignCause | 'All')} defaultValue={selectedCategory}>
+                <SelectTrigger className="w-full md:w-[280px]">
+                  <SelectValue placeholder="Filter by cause" />
+                </SelectTrigger>
+                <SelectContent>
+                  {campaignCauses.map(cause => (
+                     <SelectItem key={cause} value={cause}>{cause}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+           </div>
+           
           {isLoading ? (
              <div className="relative w-full max-w-lg mx-auto h-[520px] flex items-center justify-center">
                 <Skeleton className="w-full h-full rounded-lg" />
              </div>
           ) : (
-             <CampaignDeck campaigns={campaigns} />
+             <CampaignDeck campaigns={filteredCampaigns} />
           )}
           <div className="text-center mt-12">
              <Button asChild size="lg">

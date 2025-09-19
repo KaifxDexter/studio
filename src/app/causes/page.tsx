@@ -1,12 +1,28 @@
 
 'use client';
 
+import { useState } from 'react';
 import { CampaignCard } from '@/components/CampaignCard';
 import { useCampaigns } from '@/hooks/use-campaigns';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import type { Campaign, CampaignCause } from '@/lib/types';
+
+const campaignCauses: Array<CampaignCause | 'All'> = ['All', 'Medical', 'Education', 'Disaster Relief', 'Personal'];
 
 export default function AllCausesPage() {
   const { campaigns, isLoading } = useCampaigns();
+  const [selectedCategory, setSelectedCategory] = useState<CampaignCause | 'All'>('All');
+
+  const filteredCampaigns = selectedCategory === 'All'
+    ? campaigns
+    : campaigns.filter(campaign => campaign.cause === selectedCategory);
   
   return (
     <div className="container mx-auto px-4 py-8 md:py-16">
@@ -18,6 +34,20 @@ export default function AllCausesPage() {
           Find a cause that speaks to you. Every donation makes a difference.
         </p>
       </div>
+
+       <div className="flex justify-center mb-8">
+          <Select onValueChange={(value) => setSelectedCategory(value as CampaignCause | 'All')} defaultValue={selectedCategory}>
+            <SelectTrigger className="w-full md:w-[280px]">
+              <SelectValue placeholder="Filter by cause" />
+            </SelectTrigger>
+            <SelectContent>
+              {campaignCauses.map(cause => (
+                 <SelectItem key={cause} value={cause}>{cause}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         {isLoading ? (
           Array.from({ length: 8 }).map((_, index) => (
@@ -30,7 +60,7 @@ export default function AllCausesPage() {
             </div>
           ))
         ) : (
-          campaigns.map((campaign, index) => (
+          filteredCampaigns.map((campaign, index) => (
             <CampaignCard key={campaign.id} campaign={campaign} animationDirection="none" index={index} />
           ))
         )}
