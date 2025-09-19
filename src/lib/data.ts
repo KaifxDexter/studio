@@ -29,7 +29,7 @@ export const campaigns: Campaign[] = [
     title: 'Help Priya Fight a Rare Medical Condition',
     description: 'Priya, a 10-year-old girl, is battling a rare disease. Her family needs help to cover the costs of her treatment.',
     fullDescription: 'Priya has been diagnosed with a rare genetic disorder that requires ongoing specialized treatment not covered by insurance. Her family has exhausted their savings, and they are now facing the immense financial burden of her medical bills. The treatment is crucial for her quality of life and future. We are raising funds to cover her hospital stays, medication, and therapy sessions. Your support can give Priya a fighting chance and bring hope to her family during this incredibly difficult time.',
-    imageUrl: 'https://i.ibb.co/5xgk1y8k/unnamed.png',
+    imageUrl: 'https://i.ibb.co/5xgk1y8/unnamed.png',
     targetAmount: 75000,
     raisedAmount: 61000,
     fundraiserName: 'Friends of Priya',
@@ -209,7 +209,7 @@ export const campaigns: Campaign[] = [
     title: 'Science Labs for a School in Chennai',
     description: 'Equip a low-income school in Chennai with modern physics, chemistry, and biology labs.',
     fullDescription: 'Practical learning is essential for science education. We are fundraising to build and equip full-fledged science labs for a secondary school that serves underprivileged students in Chennai. This will give them hands-on experience and ignite a passion for science and innovation.',
-    imageUrl: 'https://i.ibb.co/dG055sB/unnamed.png',
+    imageUrl: 'https://i.ibb.co/M3HKhg7/unnamed.png',
     targetAmount: 45000,
     raisedAmount: 19500,
     fundraiserName: 'Chennai Science Initiative',
@@ -280,3 +280,6 @@ export const campaigns: Campaign[] = [
     
 
 
+
+
+    
