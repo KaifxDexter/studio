@@ -77,7 +77,7 @@ export const campaigns: Campaign[] = [
     title: 'Clean Water Project for a Community in Need',
     description: 'Fund the installation of a new well and water purification system for a village without access to clean drinking water.',
     fullDescription: 'Access to clean water is a basic human right, yet many communities still struggle to find it. We have identified a village where residents, mostly children and women, walk several miles each day to collect water from a contaminated source, leading to widespread waterborne diseases. This project will fund the drilling of a new deep-water well and the installation of a solar-powered purification system. This will provide the entire community with a sustainable source of safe, clean drinking water, dramatically improving health and quality of life.',
-    imageUrl: 'https://i.ibb.co/Mx4NCfjQ/unnamed.png',
+    imageUrl: 'https://i.ibb.co/Mx4NCfj/unnamed.png',
     targetAmount: 40000,
     raisedAmount: 15000,
     fundraiserName: 'Water for Life Initiative',
@@ -273,3 +273,6 @@ export const campaigns: Campaign[] = [
 
 
 
+
+
+    
