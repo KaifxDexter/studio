@@ -17,7 +17,7 @@ export const campaigns: Campaign[] = [
     title: 'Support for Flood Victims in the North',
     description: 'Urgent funds needed to provide shelter, food, and medical supplies to families affected by the recent devastating floods.',
     fullDescription: 'The recent floods in the northern regions have left thousands of families displaced and without basic necessities. Homes have been washed away, and livelihoods have been destroyed. We are on the ground providing immediate relief, but we need your help. Your donation will provide emergency shelter kits, clean drinking water, non-perishable food items, and essential medical care to those in desperate need. Every contribution, no matter how small, makes a significant impact in helping these communities rebuild their lives.',
-    imageUrl: 'https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-56e0-622f-a006-ff8e862af33a/raw?se=2025-09-08T12%3A44%3A28Z&sp=r&sv=2024-08-04&sr=b&scid=902effd9-4237-51d4-8e99-fb20af326956&skoid=0b778285-7b0b-4cdc-ac3b-fb93e8c3686f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-08T11%3A42%3A27Z&ske=2025-09-09T11%3A42%3A27Z&sks=b&skv=2024-08-04&sig=WWf8wcxVMHKmje9knACiwkYmuu5J8sd9biAEYqTRkow%3D',
+    imageUrl: 'https://i.ibb.co/rKDbv7q2/unnamed.png',
     targetAmount: 50000,
     raisedAmount: 22500,
     fundraiserName: 'Global Relief Foundation',
@@ -281,5 +281,7 @@ export const campaigns: Campaign[] = [
 
 
 
+
+    
 
     
