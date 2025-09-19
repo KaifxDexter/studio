@@ -113,7 +113,7 @@ export const campaigns: Campaign[] = [
     title: 'Cyclone Relief for Coastal Communities in Odisha',
     description: 'Provide immediate relief and long-term rebuilding support to families affected by the recent cyclone in Odisha.',
     fullDescription: 'Coastal Odisha has been hit by a severe cyclone, causing widespread destruction. Families have lost their homes and livelihoods. Your donation will help us provide immediate aid like food, water, and shelter, as well as support long-term recovery efforts such as rebuilding houses and restoring fishing businesses.',
-    imageUrl: 'https://i.ibb.co/Wv0pPrP/unnamed.png',
+    imageUrl: 'https://i.ibb.co/Wv0pPrPC/unnamed.png',
     targetAmount: 100000,
     raisedAmount: 37500,
     fundraiserName: 'Odisha Rebuilds',
@@ -278,3 +278,4 @@ export const campaigns: Campaign[] = [
     
 
     
+
