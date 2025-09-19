@@ -77,7 +77,7 @@ export const campaigns: Campaign[] = [
     title: 'Clean Water Project for a Community in Need',
     description: 'Fund the installation of a new well and water purification system for a village without access to clean drinking water.',
     fullDescription: 'Access to clean water is a basic human right, yet many communities still struggle to find it. We have identified a village where residents, mostly children and women, walk several miles each day to collect water from a contaminated source, leading to widespread waterborne diseases. This project will fund the drilling of a new deep-water well and the installation of a solar-powered purification system. This will provide the entire community with a sustainable source of safe, clean drinking water, dramatically improving health and quality of life.',
-    imageUrl: 'https://i.ibb.co/Mx4NCfj/unnamed.png',
+    imageUrl: 'https://i.ibb.co/Mx4NCfjQ/unnamed.png',
     targetAmount: 40000,
     raisedAmount: 15000,
     fundraiserName: 'Water for Life Initiative',
@@ -221,7 +221,7 @@ export const campaigns: Campaign[] = [
     title: 'Drought Relief for Farmers in Maharashtra',
     description: 'Provide emergency financial aid and cattle fodder to farmers in drought-stricken regions of Maharashtra.',
     fullDescription: 'Successive years of low rainfall have created a severe drought crisis in Maharashtra, pushing farmers into debt and despair. This campaign will provide direct cash transfers to the worst-affected families and supply fodder for their livestock, offering a lifeline in their time of need.',
-    imageUrl: 'https://i.ibb.co/ZpBLZB4/unnamed.png',
+    imageUrl: 'https://i.ibb.co/ZpBLZB4s/unnamed.png',
     targetAmount: 70000,
     raisedAmount: 31000,
     fundraiserName: 'Farmer Aid Maharashtra',
@@ -233,7 +233,7 @@ export const campaigns: Campaign[] = [
     title: 'Solar Panels for a Remote Himalayan Village',
     description: 'Bring clean and reliable electricity to a remote village in the Himalayas by installing a solar micro-grid.',
     fullDescription: 'A village nestled deep in the Himalayas has lived without electricity for centuries. We aim to change that by installing a community-owned solar micro-grid. This will power homes, a school, and a health clinic, transforming the lives of the villagers and opening up new opportunities.',
-    imageUrl: 'https://i.ibb.co/8L5VHmR/unnamed.png',
+    imageUrl: 'https://i.ibb.co/8L5VHmR7/unnamed.png',
     targetAmount: 55000,
     raisedAmount: 25000,
     fundraiserName: 'Himalayan Light Project',
@@ -269,6 +269,7 @@ export const campaigns: Campaign[] = [
     
 
     
+
 
 
 
